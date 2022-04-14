@@ -1,5 +1,10 @@
 <?php
 include "php/connection.php";
+session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +50,7 @@ include "php/connection.php";
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -55,7 +60,7 @@ include "php/connection.php";
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -149,17 +154,10 @@ include "php/connection.php";
                                 </div>
                                 <div class="col-md-6">
 									<div class="form-group">
-										<label>Available Days</label>
-										<select name="day" class="select" multiple required>
-											<option value="">Select Days</option>
-											<option>Sunday</option>
-											<option>Monday</option>
-											<option>Tuesday</option>
-											<option>Wednesday</option>
-											<option>Thursday</option>
-											<option>Friday</option>
-											<option>Saturday</option>
-										</select>
+										<label>Available Day</label>
+										<div class="form-group">
+                                            <input class="form-control" type="date" name="date" value="0-0-0" required>
+                                        </div>
 									</div>
                                 </div>
                             </div>

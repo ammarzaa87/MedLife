@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(empty($_SESSION['a_id'])){
+if(empty($_SESSION['d_id'])){
     header("Location: index.php");
     die();
 }
@@ -26,7 +26,7 @@ if(empty($_SESSION['a_id'])){
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="" class="logo">
 					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>MedLife</span>
 				</a>
 			</div>
@@ -79,7 +79,7 @@ if(empty($_SESSION['a_id'])){
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="php/logout.php">Logout</a>
+						<a class="dropdown-item" href="php/dr-logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -89,7 +89,7 @@ if(empty($_SESSION['a_id'])){
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                    <a class="dropdown-item" href="php/dr-logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -101,45 +101,25 @@ if(empty($_SESSION['a_id'])){
                         <li class="active">
                             <a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-						<li>
-                            <a href="doctors.php"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                        </li>
+						
                         <li>
-                            <a href="patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            <a href="dr-patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
-						<li>
-                            <a href="lab-tech.php"><i class="fa fa-medkit"></i> <span>Lab Technician</span></a>
-                        </li>
-						<li>
-                            <a href="radio-tech.php"><i class="fa fa-stethoscope"></i> <span>Radio Technician</span></a>
-                        </li>
-						<li>
-                            <a href="nurse.php"><i class="fa fa-heartbeat"></i> <span>Nurses</span></a>
-                        </li>
-                        <li>
-                            <a href="appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                        </li>
-                        <li>
-                            <a href="schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
-                        </li>
-                       
 						
 					
 						
-						
-						 <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="blogs.php">Blogs</a></li>
-                             
-                                <li><a href="add-blog.php">Add Blog</a></li>
-                                
-                            </ul>
+                        <li>
+                            <a href="dr-appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
+                        <li>
+                            <a href="dr-schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                        </li>
+                       
+					
                      
 						
                         <li>
-                            <a href="change-password.php"><i class="fa fa-lock"></i> <span>Change Password</span></a>
+                            <a href="dr-change-password.php"><i class="fa fa-lock"></i> <span>Change Password</span></a>
                         </li>
                        
                      

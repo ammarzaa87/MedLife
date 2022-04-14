@@ -1,5 +1,10 @@
 <?php
 include "php/connection.php";
+session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +46,7 @@ include "php/connection.php";
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -51,7 +56,7 @@ include "php/connection.php";
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -143,7 +148,7 @@ include "php/connection.php";
                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="edit-doctor.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a id="delete" class="dropdown-item" href="php/delete-doctor.php?dr_id=<?php echo $row['id'];?>" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                    <a id="delete" class="dropdown-item" href="php/delete-labtech.php?ltech_id=<?php echo $row['id'];?>" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                 </div>
                             </div>
                             <h4 class="doctor-name text-ellipsis"><a href="#"><?php echo $row["fname"]," ", $row["lname"];?></a></h4>

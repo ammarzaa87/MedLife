@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +49,7 @@ session_start();
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -55,7 +59,7 @@ session_start();
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>

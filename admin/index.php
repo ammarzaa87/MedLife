@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,24 +25,52 @@
                     <form action="php/login.php" method="post" class="form-signin">
 					
 						<div class="account-logo">
-                            <a href="index-2.html"><img src="assets/img/logo-dark.png" alt=""></a>
+                            <img src="assets/img/logo-dark.png" alt="">
                         </div>
-						
+						<?php
+					/* If email is already taken, print a danger alert that tells "email is already taken"*/
+                                    if (!empty($_SESSION["flash"])){
+                                    ?>
+                                    <div class="alert alert-danger" role="alert">
+                                    <?php
+                                    $x = $_SESSION["flash"];
+                                    echo $x;
+                                    $_SESSION["flash"] = "";
+                                    
+                                
+                                    ?>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text" autofocus="" name="email" class="form-control">
+                            <input type="password" autofocus="" name="username" class="form-control">
                         </div>
                         <div class="form-group">
 						
                             <label>Password</label>
                             <input type="password" name="password" class="form-control">
                         </div>
-                        <div class="form-group text-right">
-                            <a href="forgot-password.html">Forgot your password?</a>
-                        </div>
+
+                        <div class="form-group">
+												<label>User Type</label>
+												<select name="major" class="form-control select" required>
+													
+													<option value="1">Admin</option>
+													<option value="2">Doctor</option>
+													<option value="3">Lab Tech</option>
+                                                    <option value="4">Radio Tech</option>
+                                                    <option value="5">Nurse</option>
+                                                    
+												</select>
+						</div>
+                        
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary account-btn">Login</button>
                         </div>
+
+                      
                        
                     </form>
                 </div>

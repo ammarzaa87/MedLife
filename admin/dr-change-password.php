@@ -1,7 +1,7 @@
 <?php
 include "php/connection.php";
 session_start();
-if(empty($_SESSION['a_id'])){
+if(empty($_SESSION['d_id'])){
     header("Location: index.php");
     die();
 }
@@ -15,7 +15,7 @@ if(empty($_SESSION['a_id'])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <title>Change Password</title>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
@@ -50,7 +50,7 @@ if(empty($_SESSION['a_id'])){
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="php/logout.php">Logout</a>
+						<a class="dropdown-item" href="php/dr-logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -60,63 +60,41 @@ if(empty($_SESSION['a_id'])){
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                    <a class="dropdown-item" href="php/dr-logout.php">Logout</a>
                 </div>
             </div>
         </div>
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                    <li class="menu-title">Main</li>
+                <ul>
+                        <li class="menu-title">Main</li>
                         <li>
-                            <a href="admin.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href="dr-pannel.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-						<li>
-                            <a href="doctors.php"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                        </li>
+						
                         <li>
-                            <a href="patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            <a href="dr-patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
-						<li>
-                            <a href="lab-tech.php"><i class="fa fa-medkit"></i> <span>Lab Technician</span></a>
-                        </li>
-						<li>
-                            <a href="radio-tech.php"><i class="fa fa-stethoscope"></i> <span>Radio Technician</span></a>
-                        </li>
-						<li>
-                            <a href="nurse.php"><i class="fa fa-heartbeat"></i> <span>Nurses</span></a>
-                        </li>
-                        <li>
-                            <a href="appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                        </li>
-                        <li>
-                            <a href="schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
-                        </li>
-                        
 						
 					
 						
-						
-						 <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="blogs.php">Blogs</a></li>
-                                
-                                <li><a href="add-blog.php">Add Blog</a></li>
-                                
-                            </ul>
+                        <li>
+                            <a href="dr-appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
+                        <li>
+                            <a href="dr-schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                        </li>
+                       
+					
                      
 						
                         <li class="active">
-                            <a href="#"><i class="fa fa-lock"></i> <span>Change Password</span></a>
+                            <a href=""><i class="fa fa-lock"></i> <span>Change Password</span></a>
                         </li>
                        
-                      
-                        
                      
-                        
+                       
                     </ul>
                 </div>
             </div>

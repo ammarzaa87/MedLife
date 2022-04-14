@@ -1,7 +1,7 @@
 <?php
 include "php/connection.php";
 session_start();
-if(empty($_SESSION['a_id'])){
+if(empty($_SESSION['d_id'])){
     header("Location: index.php");
     die();
 }
@@ -10,24 +10,28 @@ if(empty($_SESSION['a_id'])){
 <html lang="en">
 
 
+<!-- doctors23:12-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <title>Radio Technicians</title>
+    <title>Patients</title>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
 </head>
 
 <body>
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="" class="logo">
 					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>MedLife</span>
 				</a>
 			</div>
@@ -46,7 +50,7 @@ if(empty($_SESSION['a_id'])){
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="php/logout.php">Logout</a>
+						<a class="dropdown-item" href="php/dr-logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -56,63 +60,41 @@ if(empty($_SESSION['a_id'])){
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                    <a class="dropdown-item" href="php/dr-logout.php">Logout</a>
                 </div>
             </div>
         </div>
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                    <li class="menu-title">Main</li>
-                        <li>
-                            <a href="admin.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                <ul>
+                        <li class="menu-title">Main</li>
+                        <li >
+                            <a href="dr-pannel.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-						<li>
-                            <a href="doctors.php"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+						
+                        <li class="active">
+                            <a href=""><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
-                        <li>
-                            <a href="patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                        </li>
-						<li>
-                            <a href="lab-tech.php"><i class="fa fa-medkit"></i> <span>Lab Technician</span></a>
-                        </li>
-						<li class="active">
-                            <a href="#"><i class="fa fa-stethoscope"></i> <span>Radio Technician</span></a>
-                        </li>
-						<li>
-                            <a href="nurse.php"><i class="fa fa-heartbeat"></i> <span>Nurses</span></a>
-                        </li>
-                        <li>
-                            <a href="appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                        </li>
-                        <li>
-                            <a href="schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
-                        </li>
-                        
 						
 					
 						
-						
-						 <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="blogs.php">Blog</a></li>
-                                
-                                <li><a href="add-blog.php">Add Blog</a></li>
-                                
-                            </ul>
+                        <li>
+                            <a href="dr-appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
+                        <li>
+                            <a href="dr-schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                        </li>
+                       
+					
                      
 						
                         <li>
-                            <a href="change-password.php"><i class="fa fa-lock"></i> <span>Change Password</span></a>
+                            <a href="dr-change-password.php"><i class="fa fa-lock"></i> <span>Change Password</span></a>
                         </li>
                        
-                      
-                        
                      
-                        
+                       
                     </ul>
                 </div>
             </div>
@@ -121,17 +103,15 @@ if(empty($_SESSION['a_id'])){
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">Radio Technicians</h4>
+                        <h4 class="page-title">Patients</h4>
                     </div>
-                    <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="add-radiotech.php" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Radio Technician</a>
-                    </div>
+                  
                 </div>
 				<div class="row doctor-grid">
 				
 				<?php
 					
-				   $sql1 = "SELECT * FROM `radiotech`";
+				   $sql1 = "SELECT * FROM `doctors`";
 				   $stmt1 = $connection->prepare($sql1);
 				   $stmt1->execute();
 					$result = $stmt1->get_result();
@@ -139,23 +119,22 @@ if(empty($_SESSION['a_id'])){
 						
 						
 						?>
-                    
                     <div class="col-md-4 col-sm-4  col-lg-3">
                         <div class="profile-widget">
                             <div class="doctor-img">
-                                <a class="avatar" href="#"><img alt="" src="images/lab-tech.png"></a>
+                                <a class="avatar" href="profile.html"><img alt="" src="images/<?php echo $row['profile'];?>"></a>
                             </div>
                             <div class="dropdown profile-action">
                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="edit-doctor.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a id="delete" class="dropdown-item" href="php/delete-radtech.php?rtech_id=<?php echo $row['id'];?>" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                    <a id="delete" class="dropdown-item" href="php/delete-doctor.php?dr_id=<?php echo $row['id'];?>" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                 </div>
                             </div>
-                            <h4 class="doctor-name text-ellipsis"><a href="#"><?php echo $row["fname"]," ", $row["lname"];?></a></h4>
-                            <div class="doc-prof"><?php echo $row["gender"];?></div>
+                            <h4 class="doctor-name text-ellipsis"><a href="profile.html"><?php echo $row["first_name"]," ", $row["last_name"];?></a></h4>
+                            <div class="doc-prof"><?php echo $row["speciality"];?></div>
                             <div class="user-country">
-                                <i class="fa  fa-phone"></i>   <?php echo $row["phone"];?>
+                                <i class="fa fa-map-marker"></i> <?php echo $row["address"];?>
                             </div>
                         </div>
                     </div>
@@ -165,7 +144,13 @@ if(empty($_SESSION['a_id'])){
                  
                 
                 </div>
-				
+				<div class="row">
+                    <div class="col-sm-12">
+                        <div class="see-all">
+                            <a class="see-all-btn" href="javascript:void(0);">Load More</a>
+                        </div>
+                    </div>
+                </div>
             </div>
        
         </div>

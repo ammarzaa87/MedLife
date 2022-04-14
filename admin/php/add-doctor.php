@@ -20,6 +20,11 @@ if(isset($_POST["email"]) && $_POST["email"] != "") {
 }else{
     die ("Enter email");
 }
+if(isset($_POST["id"]) && $_POST["id"] != "") {
+    $id = $_POST["id"];
+}else{
+    die ("Enter id");
+}
 
 
 
@@ -112,18 +117,18 @@ else{
 
 
 
-$sql1="Select * from doctors where email=?"; #Check if the email already exists in the database
+$sql1="Select * from doctors where dr_id=?"; #Check if the email already exists in the database
 $stmt1 = $connection->prepare($sql1);
-$stmt1->bind_param("s",$email);
+$stmt1->bind_param("s",$id);
 $stmt1->execute();
 $result = $stmt1->get_result();
 $row = $result->fetch_assoc();
 if(empty($row)){
 
 		$hash = hash('sha256', $password);
-		$sql4 = "INSERT INTO `doctors` (`first_name`, `last_name`, `gender`,`phone`,`email`,`password`,`birth`,`profile`,`speciality`,`address`,`biography`) VALUES (?,?,?,?,?,?,?,?,?,?,?);"; #add the new user to the database
+		$sql4 = "INSERT INTO `doctors` (`first_name`, `last_name`,`dr_id`, `gender`,`phone`,`email`,`password`,`birth`,`profile`,`speciality`,`address`,`biography`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);"; #add the new user to the database
 		$stmt4 = $connection->prepare($sql4);
-		$stmt4->bind_param("sssssssssss",$fname,$lname,$gender,$phone,$email,$hash,$birth,$new_img_name,$major,$address,$biography);
+		$stmt4->bind_param("ssssssssssss",$fname,$lname,$id,$gender,$phone,$email,$hash,$birth,$new_img_name,$major,$address,$biography);
 		$stmt4->execute();
 		header('location: ../doctors.php');
 	
@@ -132,7 +137,7 @@ if(empty($row)){
 }
 else{
     session_start();
-    $_SESSION["flash"] = "This email is taken, please register with new one";
+    $_SESSION["flash"] = "ID already exists";
     header('location: ../add-doctor.php');
 }
 ?>

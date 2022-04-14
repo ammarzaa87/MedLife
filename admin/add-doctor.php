@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +46,7 @@ session_start();
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -52,7 +56,7 @@ session_start();
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -94,7 +98,7 @@ session_start();
                             <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="blogs.php">Blogs</a></li>
-                                <li><a href="add-blogs.php">Add Blog</a></li>
+                                <li><a href="add-blog.php">Add Blog</a></li>
                                 
                             </ul>
                         </li>
@@ -134,11 +138,9 @@ session_start();
                                         <input name="lname" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                              
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group">
-                                
-                                        <label>Email <span class="text-danger">*</span></label>
+                                        <label>ID <span class="text-danger">*</span></label>
                                         <?php
 					/* If email is already taken, print a danger alert that tells "email is already taken"*/
                                     if (!empty($_SESSION["flash"])){
@@ -155,10 +157,19 @@ session_start();
                                     <?php
                                     }
                                     ?>
+                                        <input name="id" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+                              
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                
+                                        <label>Email <span class="text-danger">*</span></label>
+                                        
                                         <input name="email" class="form-control" type="email" required>
                                     </div>
                                 </div>
-								<div class="col-sm-6">
+								<div class="col-sm-4">
 											<div class="form-group">
 												<label>Speciality <span class="text-danger">*</span></label>
 												<select name="major" class="form-control select" required>

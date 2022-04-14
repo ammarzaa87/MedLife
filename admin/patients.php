@@ -1,5 +1,10 @@
 <?php
 include "php/connection.php";
+session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +51,7 @@ include "php/connection.php";
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -56,7 +61,7 @@ include "php/connection.php";
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
            
@@ -156,7 +161,7 @@ include "php/connection.php";
                                         
                                         ?>
 									<tr>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""><?php echo $row["fname"]," ", $row["lname"];?></td>
+										<td><img width="28" height="28" src="images/<?php echo $row['profile'];?>" class="rounded-circle m-r-5" alt=""><?php echo $row["fname"]," ", $row["lname"];?></td>
 										<td><?php echo $age;?></td>
 										<td><?php echo $row["address"];?></td>
 										<td><?php echo $row["phone"];?></td>
@@ -166,7 +171,7 @@ include "php/connection.php";
 												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
 												<div class="dropdown-menu dropdown-menu-right">
 													<a class="dropdown-item" href="edit-patient.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-													<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+													<a class="dropdown-item" href="php/delete-patient.php?pid=<?php echo $row['id'];?>" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 												</div>
 											</div>
 										</td>

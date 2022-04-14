@@ -1,5 +1,10 @@
 <?php
 include "php/connection.php";
+session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +48,7 @@ include "php/connection.php";
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -53,7 +58,7 @@ include "php/connection.php";
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -96,7 +101,7 @@ include "php/connection.php";
                             <ul style="display: none;">
                                 <li><a href="blogs.php">Blogs</a></li>
                                 
-                                <li><a class="active" href="add-blog.php">Add Blog</a></li>
+                                <li><a class="active" href="#">Add Blog</a></li>
                                 
                             </ul>
                         </li>
@@ -122,7 +127,7 @@ include "php/connection.php";
                     <div class="col-lg-8 offset-lg-2">
                         <form action="php/add-blog.php" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Blog Name</label>
+                                <label>Blog Title</label>
                                 <input name="name" class="form-control" type="text" required>
                             </div>
                             <div class="form-group">

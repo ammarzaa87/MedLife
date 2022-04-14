@@ -1,11 +1,15 @@
 <?php
 include "php/connection.php";
+session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 
-<!-- blog23:34-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -14,10 +18,7 @@ include "php/connection.php";
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
+  
 </head>
 
 <body>
@@ -25,7 +26,7 @@ include "php/connection.php";
         <div class="header">
 			<div class="header-left">
 				<a href="index-2.html" class="logo">
-					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>Preclinic</span>
+					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>MedLife</span>
 				</a>
 			</div>
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -46,7 +47,7 @@ include "php/connection.php";
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
@@ -56,7 +57,7 @@ include "php/connection.php";
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -119,7 +120,7 @@ include "php/connection.php";
                         <h4 class="page-title">Blog</h4>
                     </div>
                     <div class="col-sm-4 col-8 text-right m-b-30">
-                        <a class="btn btn-primary btn-rounded float-right" href="add-blog.html"><i class="fa fa-plus"></i> Add Blog</a>
+                        <a class="btn btn-primary btn-rounded float-right" href="add-blog.php"><i class="fa fa-plus"></i> Add Blog</a>
                     </div>
                 </div>
                 <div class="row">
@@ -142,14 +143,12 @@ include "php/connection.php";
                             <div class="blog-content">
                                 <h3 class="blog-title"><a href="blog-details.html"><?php echo $row["name"];?></a></h3>
                                 <p> <?php echo $row["description"];?></p>
-                                <a href="blog-details.html" class="read-more"><i class="fa fa-long-arrow-right"></i> Read More</a>
+                                
                                 <div class="blog-info clearfix">
                                     <div class="post-left">
-                                        <ul>
-                                            <li><a href="#."><i class="fa fa-calendar"></i> <span>December 6, 2017</span></a></li>
-                                        </ul>
+                                        
                                     </div>
-                                    <div class="post-right"><a href="#."><i class="fa fa-heart-o"></i>21</a> <a href="#."><i class="fa fa-eye"></i>8</a> <a href="#."><i class="fa fa-comment-o"></i>17</a></div>
+                                    <div class="post-right"><a href="php/delete-blog.php?blog_id=<?php echo $row['id'];?>"><i class="fa fa-trash-o m-r-5"> Delete </i></a> </div>
                                 </div>
                             </div>
                         </div>
