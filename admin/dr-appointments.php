@@ -25,7 +25,7 @@ if(empty($_SESSION['d_id'])){
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="" class="logo">
+				<a href="dr-pannel.php" class="logo">
 					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>MedLife</span>
 				</a>
 			</div>

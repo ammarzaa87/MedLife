@@ -1,4 +1,5 @@
 <?php
+include "php/connection.php";
 session_start();
 if(empty($_SESSION['a_id'])){
     header("Location: index.php");
@@ -26,7 +27,7 @@ if(empty($_SESSION['a_id'])){
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="" class="logo">
 					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>MedLife</span>
 				</a>
 			</div>
@@ -153,6 +154,18 @@ if(empty($_SESSION['a_id'])){
 
             </div>
         </div>
+		<?php
+					
+					$sql1 = "Select (select count(*) from doctors) as count1, (select count(*) from patients) as count2,
+					(select count(*) from nurses) as count3,
+					 (select count(*) from labtech) as count4, (select count(*) from radiotech) as count5;";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -160,26 +173,31 @@ if(empty($_SESSION['a_id'])){
                         <div class="dash-widget">
 							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
 							<div class="dash-widget-info text-right">
-								<h3>98</h3>
+
+								<h3><?php echo $row["count1"];?></h3>
 								<span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
 							</div>
                         </div>
                     </div>
+				
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <div class="dash-widget">
                             <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
                             <div class="dash-widget-info text-right">
-                                <h3>1072</h3>
+                                <h3><?php echo $row["count2"];?></h3>
                                 <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>
+				
+					
+					
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <div class="dash-widget">
                             <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
                             <div class="dash-widget-info text-right">
-                                <h3>72</h3>
-                                <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
+                                <h3><?php echo $row["count3"];?></h3>
+                                <span class="widget-title3">Nurses <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>
@@ -187,8 +205,8 @@ if(empty($_SESSION['a_id'])){
                         <div class="dash-widget">
                             <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
                             <div class="dash-widget-info text-right">
-                                <h3>618</h3>
-                                <span class="widget-title4">Pending <i class="fa fa-check" aria-hidden="true"></i></span>
+                                <h3><?php echo $row["count4"]+$row["count5"];?></h3>
+                                <span class="widget-title4">Technicians <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>

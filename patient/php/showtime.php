@@ -1,10 +1,10 @@
 <?php
 include "connection.php";
 $dr_id = $_GET["d_id"];
-
-$query = "SELECT T.fromm,T.too FROM timing AS T, has_time AS H WHERE H.timing_id=T.id AND H.doctor_id=?";
+$date = $_GET["date"];
+$query = "SELECT T.fromm,T.too,T.id FROM timing AS T, has_time AS H WHERE H.timing_id=T.id AND H.doctor_id=? AND H.date=? AND availability=1 order by id";
 $stmt = $connection->prepare($query);
-$stmt->bind_param("s", $dr_id);
+$stmt->bind_param("ss", $dr_id,$date);
 $stmt->execute();
 $result = $stmt->get_result();
 $temp_array = [];

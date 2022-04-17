@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "php/connection.php";
 if(empty($_SESSION['a_id'])){
     header("Location: index.php");
     die();
@@ -13,7 +14,7 @@ if(empty($_SESSION['a_id'])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <title>Appointments</title>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
@@ -141,15 +142,34 @@ if(empty($_SESSION['a_id'])){
 									</tr>
 								</thead>
 								<tbody>
+
+
+									
+			        	<?php
+					
+                            $sql1 = "SELECT A.id, D.first_name,D.last_name,D.speciality,P.fname,P.lname,P.birth,T.fromm,T.too,A.date, A.status
+                             FROM appointments AS A, patients AS P, timing AS T , doctors AS D WHERE A.patient_ssn=P.ssn
+                              AND A.time_id=T.id AND A.dr_id=D.id;";
+                            $stmt1 = $connection->prepare($sql1);
+                            $stmt1->execute();
+                            $result = $stmt1->get_result();
+                            while($row = $result->fetch_assoc()) {
+                                $dateOfBirth = $row["birth"];;
+                                $today = date("Y-m-d");
+                                $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                                $age = $diff->format('%y');
+                                
+                         
+                         ?>
 									<tr>
-										<td>APT0001</td>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> Denise Stevens</td>
-										<td>35</td>
-										<td>Henry Daniels</td>
-										<td>Cardiology</td>
-										<td>30 Dec 2018</td>
-										<td>10:00am - 11:00am</td>
-										<td><span class="custom-badge status-red">Inactive</span></td>
+										<td>APT<?php echo $row['id'];?></td>
+										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> <?php echo $row["fname"]," ", $row["lname"];?></td>
+										<td><?php echo $age;?></td>
+										<td><?php echo $row["first_name"]," ", $row["last_name"];?></td>
+										<td><?php echo $row['speciality'];?></td>
+										<td><?php echo $row['date'];?></td>
+										<td><?php echo $row["fromm"]," ", $row["too"];?></td>
+										<td><span class="custom-badge status-<?php echo( $row["status"]==1 ? 'green' : 'red' );?>"><?php echo( $row["status"]==1 ? 'On Progress' : 'Done' );?></span></td>
 										<td class="text-right">
 											<div class="dropdown dropdown-action">
 												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -160,25 +180,10 @@ if(empty($_SESSION['a_id'])){
 											</div>
 										</td>
 									</tr>
-									<tr>
-										<td>APT0002</td>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> Denise Stevens</td>
-										<td>35</td>
-										<td>Henry Daniels</td>
-										<td>Cardiology</td>
-										<td>30 Dec 2018</td>
-										<td>10:00am - 11:00am</td>
-										<td><span class="custom-badge status-green">Active</span></td>
-										<td class="text-right">
-											<div class="dropdown dropdown-action">
-												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="edit-appointment.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-													<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_appointment"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-												</div>
-											</div>
-										</td>
-									</tr>
+                             <?php
+                                }
+                            ?>
+
 								</tbody>
 							</table>
 						</div>

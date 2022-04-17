@@ -29,9 +29,12 @@ include "php/connection.php";
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   
+
+  
+	
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">MedLife</a>
+	      <a class="navbar-brand" href="home.php">MedLife</a>
 	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -44,8 +47,9 @@ include "php/connection.php";
 	          <li class="nav-item"><a href="#doctor-section" class="nav-link"><span>Doctors</span></a></li>
 	          <li class="nav-item"><a href="#blog-section" class="nav-link"><span>Blog</span></a></li>
 	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-	          <li class="nav-item cta mr-md-2"><a href="appointment.html" class="nav-link">Appointment</a></li>
-			  <li class="nav-item cta mr-md-2"><a href="ammar.pdf" class="nav-link">Medical File</a></li>
+			  <li class="nav-item cta mr-md-2"><a href="login.php" class="nav-link">Sign In</a></li>
+			  <li class="nav-item cta mr-md-2"><a href="login.php" class="nav-link">Sign Up</a></li>
+	          
 	        </ul>
 	      </div>
 	    </div>
@@ -60,7 +64,7 @@ include "php/connection.php";
           		<span class="subheading">Welcome to MedLife</span>
 	            <h1 class="mb-4">We are here <br>for your Care</h1>
 	            <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-	            <p><a href="appointment.html" class="btn btn-primary py-3 px-4">Make an appointment</a></p>
+	            <p><a href="#app" class="btn btn-primary py-3 px-4">Make an appointment</a></p>
             </div>
           </div>
         </div>
@@ -70,7 +74,7 @@ include "php/connection.php";
 		
 
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb ftco-services-2 bg-light">
+		<section id="app" class="ftco-section ftco-no-pt ftco-no-pb ftco-services-2 bg-light">
 			<div class="container">
         <div class="row d-flex">
 	        <div class="col-md-7 py-5">
@@ -122,16 +126,9 @@ include "php/connection.php";
 		      </div>
 		      <div class="col-md-5 d-flex">
 	        	<div class="appointment-wrap bg-white p-4 p-md-5 d-flex align-items-center">
-		        	<form action="#" class="appointment-form ftco-animate">
+		        	<form action="php/add-appointment.php"  method="post" class="appointment-form ftco-animate">
 		        		<h3>Book an Appointment</h3>
-		    				<div class="">
-			    				<div class="form-group">
-			    					<input type="text" class="form-control" placeholder="First Name">
-			    				</div>
-			    				<div class="form-group">
-			    					<input type="text" class="form-control" placeholder="Last Name">
-			    				</div>
-		    				</div>
+		    				
 		    				<div class="">
 		    					<div class="form-group">
 			    					<div class="form-field">
@@ -178,7 +175,7 @@ include "php/connection.php";
 			    				<div class="form-group">
 			    					<div class="input-wrap">
 			            		
-			            		<input name="date" id="date" type="date" class="form-control" placeholder="Date">
+			            		<input name="date" id="date" type="date" class="form-control" value="0-0-0" placeholder="Date">
 		            		</div>
 			    				</div>
 								<div class="form-group">
@@ -195,7 +192,7 @@ include "php/connection.php";
 		    				</div>
 		    				<div class="">
 		    					<div class="form-group">
-			              <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+			              <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
 			            </div>
 			            <div class="form-group">
 			              <input type="submit" value="Appointment" class="btn btn-secondary py-3 px-4">
@@ -382,7 +379,7 @@ include "php/connection.php";
 					<div class="col-md-5 heading-section heading-section-white">
 						<span class="subheading">Fun facts</span>
 						<h2 class="mb-4">Over 5,100 patients trust us</h2>
-						<p class="mb-0"><a href="#" class="btn btn-secondary px-4 py-3">Make an appointment</a></p>
+						<p class="mb-0"><a href="#app" class="btn btn-secondary px-4 py-3">Make an appointment</a></p>
 					</div>
 					<div class="col-md-7">
 						<div class="row pt-4">
@@ -425,7 +422,7 @@ include "php/connection.php";
 		</section>
 
 
-    <section class="ftco-section bg-light" id="blog-section">
+		<section class="ftco-section bg-light" id="blog-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
           <div class="col-md-10 heading-section text-center ftco-animate">
@@ -434,22 +431,42 @@ include "php/connection.php";
         </div>
         <div class="row d-flex">
          
+
+		<?php
+					
+				   $sql1 = "SELECT * FROM `blog`";
+				   $stmt1 = $connection->prepare($sql1);
+				   $stmt1->execute();
+					$result = $stmt1->get_result();
+					while($row = $result->fetch_assoc()) {
+						
+						
+		?>
         	<div class="col-md-4 ftco-animate">
             <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');">
+              <a href="blog-single.html" class="block-20" style="background-image: url('../admin/images/<?php echo $row['image'];?>');">
               </a>
               <div class="text d-block">
               	<div class="meta mb-3">
                   <div><a href="#">June 9, 2019</a></div>
                   <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                  
                 </div>
-                <h3 class="heading"><a href="#">Scary Thing That You Don’t Get Enough Sleep</a></h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h3 class="heading"><a href="#"><?php echo $row['name'];?></a></h3>
+                <p><?php echo $row['description'];?></p>
                 <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>
               </div>
             </div>
         	</div>
+
+
+			<?php
+					}
+				   ?>
+
+		
+
+		
 
         </div>
       </div>
@@ -624,9 +641,10 @@ include "php/connection.php";
 
 	$("#date").change(function () {
 		$('#time').empty();
+		console.log($('#date').val());
 			async function timefetchAPI(){
 				
-				const response = await fetch('http://localhost/MedLife/patient/php/showtime.php?d_id='+$('#dr').val());
+				const response = await fetch('http://localhost/MedLife/patient/php/showtime.php?d_id='+$('#dr').val()+'&date='+$('#date').val());
 				if(!response.ok){
 					const message = "An Error has occured";
 					throw new Error(message);
@@ -650,7 +668,7 @@ include "php/connection.php";
         for (var i = 0; i < results.length; i++) {
             // POPULATE SELECT ELEMENT WITH JSON.
             ele.innerHTML = ele.innerHTML +
-                '<option value="' + results[i]['id'] + '">' + results[i]['fromm'] +" "+results[i]['too']+ '</option>';
+                '<option>' + results[i]['fromm'] +" - "+results[i]['too']+ '</option>';
         }
 		
 		

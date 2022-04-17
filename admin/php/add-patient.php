@@ -75,12 +75,9 @@ if(isset($_POST["phone"]) && $_POST["phone"] != "") {
 $address = $_POST["city"].", ".$_POST["state"].", ".$_POST["country"];
 
 $biography = $_POST["bio"];
-if($gender=="Male"){
-	$new_img_name = "doctor.jpg";
-}
-else{
-	$new_img_name = "f-doctor.jpg";
-}
+
+$new_img_name = "user.jpg";
+
 
 
 	echo "<pre>";

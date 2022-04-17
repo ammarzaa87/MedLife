@@ -27,7 +27,7 @@ if(empty($_SESSION['a_id'])){
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="admin.php" class="logo">
 					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>MedLife</span>
 				</a>
 			</div>
@@ -143,7 +143,7 @@ if(empty($_SESSION['a_id'])){
                     <div class="col-md-4 col-sm-4  col-lg-3">
                         <div class="profile-widget">
                             <div class="doctor-img">
-                                <a class="avatar" href="#"><img alt="" src="images/lab-tech.png"></a>
+                                <a class="avatar" href="#"><img alt="" src="images/radio-tech.jpg"></a>
                             </div>
                             <div class="dropdown profile-action">
                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

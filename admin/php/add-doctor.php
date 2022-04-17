@@ -71,10 +71,10 @@ $address = $_POST["city"].", ".$_POST["state"].", ".$_POST["country"];
 
 $biography = $_POST["bio"];
 if($gender=="Male"){
-	$new_img_name = "doctor.jpg";
+	$new_img_name = "doctor.png";
 }
 else{
-	$new_img_name = "f-doctor.jpg";
+	$new_img_name = "f-doctor.png";
 }
 
 
