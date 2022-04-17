@@ -165,47 +165,12 @@
 					<div class="tab-content">
 						<div class="tab-pane show active" id="about-cont">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div id="file" class="col-md-12">
 
 
-                        <div class="card-box">
-                            <h3 class="card-title">Bekaa Hospital</h3>
-                            <div class="experience-box">
-                                <ul class="experience-list">
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Diagnoisis</a>
-                                                <div>A text can be any example of written or spoken language,
-                                                     from something as complex as a book or legal document to something as simple 
-                                                     as the body of an email or the words on the back of a cereal box. … Literary theorists, 
-                                                     for example, focus primarily on literary texts—novels, essays, stories, and poems.</div>
-                                                
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="experience-user">
-                                            <div class="before-circle"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <div class="timeline-content">
-                                                <a href="#/" class="name">Prescription</a>
-                                                <div>A text can be any example of written or spoken language,
-                                                     from something as complex as a book or legal document to something as simple 
-                                                     as the body of an email or the words on the back of a cereal box. … Literary theorists, 
-                                                     for example, focus primarily on literary texts—novels, essays, stories, and poems.</div>
-                                                <span class="time">1997 - 2001</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
+                        
+                           
+                        
 
 
 
@@ -234,6 +199,78 @@
        
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+			async function fetchAPI(){
+				const response = await fetch('http://localhost/api/get.php?ssn=0000123456789');
+				if(!response.ok){
+					const message = "An Error has occured";
+					throw new Error(message);
+				}
+				
+				const results = await response.json();
+				return results; 
+			}
+			
+           
+			$(document).ready(function() {
+                
+				fetchAPI().then(results => {
+                    console.log(results);
+					buildTable(results);
+					
+				}).catch(error => {
+					console.log(error.message);
+				})
+			});
+	
+		</script>
+
+<script>
+
+
+function buildTable(data){
+    var table = document.getElementById('file')
+
+    for (var i = 0; i < data.length; i++){
+        var row = ` <div  class="card-box">
+        <h3 class="card-title">${data[i].hospital_name}</h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Diagnoisis</a>
+                                                <div>${data[i].overall_diagnosis}</div>
+                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name">Prescription</a>
+                                                <div>${data[i].prescription}</div>
+                                                <span class="time">${data[i].date}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            </div>`
+        table.innerHTML += row
+
+
+    }
+}
+
+</script>
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/popper.min.js"></script>
