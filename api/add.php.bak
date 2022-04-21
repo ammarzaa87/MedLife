@@ -61,6 +61,6 @@
 	
 	}
 	else{
-		echo json_encode(array("statusCode"=>"you must be authenticated"));
+		die("you must be authenticated");
 	}
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2022 at 07:37 PM
+-- Generation Time: Apr 21, 2022 at 08:48 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -31,7 +31,7 @@ CREATE TABLE `file` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `patient_ssn` varchar(255) NOT NULL,
-  `doctor_nb` int(11) NOT NULL,
+  `doctor_nb` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `overall_diagnosis` varchar(2000) NOT NULL,
   `prescription` varchar(2000) NOT NULL
@@ -42,8 +42,9 @@ CREATE TABLE `file` (
 --
 
 INSERT INTO `file` (`id`, `user_id`, `patient_ssn`, `doctor_nb`, `date`, `overall_diagnosis`, `prescription`) VALUES
-(7, 1, '0000123456789', 100, '2017-04-07', 'A medical diagnosis is needed to establish the condition that is causing a person\'s signs and symptoms, and also to determine the necessary treatment. A diagnosis is typically obtained by a doctor or other healthcare provider and usually begins with a physical examination and an exploration of the patient\'s history.', 'As per Indian Medical Laws a valid prescription should have the following information : Name, qualification, address and registration number of the doctor. Name, age and gender of the patient. Date of consultation. Name of the Medication prescribed.'),
-(8, 2, '0000123456789', 100, '2020-04-09', 'a definitive diagnosis of cancer is made via tissue examination by a pathologist. Principal diagnosis. The single medical diagnosis that is most relevant to the patient\'s chief complaint or need for treatment. Many patients have additional diagnoses.', 'What are the 7 parts of a prescription? Image result for doctor prescription example Every drug prescription consists of seven parts: the prescriber\'s information, the patient\'s information, the recipe (the medication, or Rx), the signature (the patient instructions or Sig), the dispensing instructions (how much medication to be dispensed to the patient or Disp), the number of refills (or Rf)');
+(7, 1, '0000123456789', '100', '2017-04-07', 'A medical diagnosis is needed to establish the condition that is causing a person\'s signs and symptoms, and also to determine the necessary treatment. A diagnosis is typically obtained by a doctor or other healthcare provider and usually begins with a physical examination and an exploration of the patient\'s history.', 'As per Indian Medical Laws a valid prescription should have the following information : Name, qualification, address and registration number of the doctor. Name, age and gender of the patient. Date of consultation. Name of the Medication prescribed.'),
+(8, 2, '0000123456789', '100', '2020-04-09', 'a definitive diagnosis of cancer is made via tissue examination by a pathologist. Principal diagnosis. The single medical diagnosis that is most relevant to the patient\'s chief complaint or need for treatment. Many patients have additional diagnoses.', 'What are the 7 parts of a prescription? Image result for doctor prescription example Every drug prescription consists of seven parts: the prescriber\'s information, the patient\'s information, the recipe (the medication, or Rx), the signature (the patient instructions or Sig), the dispensing instructions (how much medication to be dispensed to the patient or Disp), the number of refills (or Rf)'),
+(31, 2, '0000123456789', '2185745945', '2022-04-19', 'hhhhhhhhh', 'hhhhhhhhhhh');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `user`

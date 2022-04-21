@@ -1,4 +1,5 @@
 <?php
+include "php/connection.php";
 session_start();
 if(empty($_SESSION['d_id'])){
     header("Location: index.php");
@@ -118,32 +119,52 @@ if(empty($_SESSION['d_id'])){
 										<th>Appointment Date</th>
 										<th>Appointment Time</th>
 										<th>Status</th>
-										
+										<th class="text-right">Action</th>
 									</tr>
 								</thead>
 								<tbody>
+
+
+									
+			        	<?php
+                            $d_id = $_SESSION['d_id'];
+                            $sql1 = "SELECT A.id,A.time_id, D.first_name,D.last_name,D.speciality,P.ssn,P.fname,P.lname,P.birth,T.fromm,T.too,A.date, A.status
+                            FROM appointments AS A, patients AS P, timing AS T , doctors AS D WHERE A.patient_ssn=P.ssn
+                             AND A.time_id=T.id AND A.dr_id=D.id AND A.dr_id=$d_id AND A.status=1 ORDER BY A.date,A.time_id;";
+                            $stmt1 = $connection->prepare($sql1);
+                            $stmt1->execute();
+                            $result = $stmt1->get_result();
+                            while($row = $result->fetch_assoc()) {
+                                $dateOfBirth = $row["birth"];;
+                                $today = date("Y-m-d");
+                                $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                                $age = $diff->format('%y');
+                                
+                         
+                         ?>
 									<tr>
-										<td>APT0001</td>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> Denise Stevens</td>
-										<td>35</td>
-										<td>Henry Daniels</td>
-										<td>Cardiology</td>
-										<td>30 Dec 2018</td>
-										<td>10:00am - 11:00am</td>
-										<td><span class="custom-badge status-red">Inactive</span></td>
-										
+										<td>APT<?php echo $row['id'];?></td>
+										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> <?php echo $row["fname"]," ", $row["lname"];?></td>
+										<td><?php echo $age;?></td>
+										<td><?php echo $row["first_name"]," ", $row["last_name"];?></td>
+										<td><?php echo $row['speciality'];?></td>
+										<td><?php echo $row['date'];?></td>
+										<td><?php echo $row["fromm"]," ", $row["too"];?></td>
+										<td><a href="dr-medfile.php?ssn=<?php echo $row["ssn"];?>"><span class="custom-badge status-green">Start Appointment</span></a></td>
+										<td class="text-right">
+											<div class="dropdown dropdown-action">
+												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a style="color:green;" class="dropdown-item" href="php/app-done.php?id=<?php echo $row['id'];?>"><i class="fa fa-check m-r-5"></i>Mark As Done</a>
+													<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_appointment"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+												</div>
+											</div>
+										</td>
 									</tr>
-									<tr>
-										<td>APT0002</td>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> Denise Stevens</td>
-										<td>35</td>
-										<td>Henry Daniels</td>
-										<td>Cardiology</td>
-										<td>30 Dec 2018</td>
-										<td>10:00am - 11:00am</td>
-										<td><a href="medfile.php"><span class="custom-badge status-green">Active</span></a></td>
-										
-									</tr>
+                             <?php
+                                }
+                            ?>
+
 								</tbody>
 							</table>
 						</div>
@@ -153,8 +174,20 @@ if(empty($_SESSION['d_id'])){
 
 
 
-
-           
+            
+			<div id="delete_appointment" class="modal fade delete-modal" role="dialog">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-body text-center">
+							<img src="assets/img/sent.png" alt="" width="50" height="46">
+							<h3>Are you sure want to delete this Appointment?</h3>
+							<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+								<button type="submit" class="btn btn-danger">Delete</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>

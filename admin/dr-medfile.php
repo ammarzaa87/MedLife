@@ -1,3 +1,11 @@
+<?php
+include "php/connection.php";
+session_start();
+if(empty($_SESSION['d_id'])){
+    header("Location: index.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,7 +96,7 @@
                             <a href="dr-change-password.php"><i class="fa fa-lock"></i> <span>Change Password</span></a>
                         </li>
                        
-                     
+                        
                        
                     </ul>
                 </div>
@@ -103,53 +111,67 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-7 col-6">
-                        <h4 class="page-title">My Profile</h4>
+                        <h4 class="page-title">Medical File</h4>
                     </div>
 
                     <div class="col-sm-5 col-6 text-right m-b-30">
-                        <a href="edit-profile.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Profile</a>
+                        <a href="dr-addpresc.php?ssn=<?php echo $_GET['ssn'];?>" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i>Add To File</a>
+                        <a href="dr-asktest.php?ssn=<?php echo $_GET['ssn'];?>" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i>Ask For Test</a>
                     </div>
+
+                    
+
                 </div>
+                <?php
+					$ssn=$_GET['ssn'];
+					$sql1 = "Select * from patients where ssn=$ssn";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
                 <div class="card-box profile-header">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="profile-view">
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
-                                        <a href="#"><img class="avatar" src="assets/img/doctor-03.jpg" alt=""></a>
+                                        <a href="#"><img class="avatar" src="images/<?php echo $row['profile'];?>" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="profile-basic">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
-                                                <h3 class="user-name m-t-0 mb-0">Cristina Groves</h3>
-                                                <small class="text-muted">Gynecologist</small>
-                                                <div class="staff-id">Employee ID : DR-0001</div>
-                                                <div class="staff-msg"><a href="chat.html" class="btn btn-primary">Send Message</a></div>
+                                                <h3 class="user-name m-t-0 mb-0"><?php echo $row["fname"]," ", $row["lname"];?></h3>
+                                                <small class="text-muted"></small>
+                                                <div class="staff-id">SSN : <?php echo $row["ssn"];?></div>
+                                               
                                             </div>
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
                                                 <li>
                                                     <span class="title">Phone:</span>
-                                                    <span class="text"><a href="#">770-889-6484</a></span>
+                                                    <span class="text"><a href="#"><?php echo $row["phone"];?></a></span>
                                                 </li>
                                                 <li>
                                                     <span class="title">Email:</span>
-                                                    <span class="text"><a href="#">cristinagroves@example.com</a></span>
+                                                    <span class="text"><a href="#"><?php echo $row["email"];?></a></span>
                                                 </li>
                                                 <li>
                                                     <span class="title">Birthday:</span>
-                                                    <span class="text">3rd March</span>
+                                                    <span class="text"><?php echo $row["birth"];?></span>
                                                 </li>
                                                 <li>
                                                     <span class="title">Address:</span>
-                                                    <span class="text">714 Burwell Heights Road, Bridge City, TX, 77611</span>
+                                                    <span class="text"><?php echo $row["address"];?></span>
                                                 </li>
                                                 <li>
                                                     <span class="title">Gender:</span>
-                                                    <span class="text">Female</span>
+                                                    <span class="text"><?php echo $row["gender"];?></span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -160,39 +182,28 @@
                     </div>
                 </div>
 				<div class="profile-tabs">
-					
+                <ul class="nav nav-tabs nav-tabs-bottom">
+						<li class="nav-item"><a class="nav-link active" href="#about-cont" data-toggle="tab">Medical File</a></li>
+						<li class="nav-item"><a class="nav-link" href="#bottom-tab2" data-toggle="tab">Medical Tests</a></li>
+						
+					</ul>
 
 					<div class="tab-content">
 						<div class="tab-pane show active" id="about-cont">
                 <div class="row">
                     <div id="file" class="col-md-12">
-
-
-                        
-                           
-                        
-
-
-
-                        
-                   
-
-
-
-                   
-
-
-
-
-                     
+ 
                     </div>
                 </div>
 						</div>
+                        <div class="tab-pane" id="bottom-tab2">
+							Tab content 2
+						</div>
+						
 						
 					</div>
 				</div>
             </div>
-
 
 
 
@@ -202,7 +213,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
 			async function fetchAPI(){
-				const response = await fetch('http://localhost/api/get.php?ssn=0000123456789');
+				const response = await fetch('http://localhost/api/get.php?ssn=<?php echo $_GET['ssn'];?>');
 				if(!response.ok){
 					const message = "An Error has occured";
 					throw new Error(message);
@@ -243,7 +254,7 @@ function buildTable(data){
                                         </div>
                                         <div class="experience-content">
                                             <div class="timeline-content">
-                                                <a href="#/" class="name">Diagnoisis</a>
+                                                <a href="#/" class="name">Diagnosis</a>
                                                 <div>${data[i].overall_diagnosis}</div>
                                                 
                                             </div>

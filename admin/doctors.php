@@ -117,6 +117,8 @@ if(empty($_SESSION['a_id'])){
                 </div>
             </div>
         </div>
+
+        
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
