@@ -91,6 +91,7 @@ if(empty($_SESSION['u_id'])){
 	    </div>
 	  </nav>
 	  
+	  
 	  <section class="hero-wrap js-fullheight" style="background-image: url('images/bg_3.jpg');" data-section="home" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -99,7 +100,7 @@ if(empty($_SESSION['u_id'])){
           	<div class="mt-5">
           		<span class="subheading">Welcome to MedLife</span>
 	            <h1 class="mb-4">We are here <br>for your Care</h1>
-	            <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+	            <p class="mb-4">Hospitals are only an intermediate stage of civilization, never intended at all even to take in the whole sick population.</p>
 	            <p><a href="#app" class="btn btn-primary py-3 px-4">Make an appointment</a></p>
             </div>
           </div>
@@ -126,7 +127,7 @@ if(empty($_SESSION['u_id'])){
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-ambulance"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">Emergency Services</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			                <p>Though force can protect in emergency, only justice, fairness, consideration and cooperation can finally lead men to the dawn of eternal peace.</p>
 			              </div>
 			            </div>      
 			          </div>
@@ -135,7 +136,7 @@ if(empty($_SESSION['u_id'])){
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-doctor"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">Qualified Doctors</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			                <p>Everything that irritates us about others can lead us to an understanding of ourselves.</p>
 			              </div>
 			            </div>      
 			          </div>
@@ -144,7 +145,7 @@ if(empty($_SESSION['u_id'])){
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-stethoscope"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">Outdoors Checkup</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			                <p>The aim of medicine is to prevent disease and prolong life, the ideal of medicine is to eliminate the need of a physician.</p>
 			              </div>
 			            </div>      
 			          </div>
@@ -153,7 +154,7 @@ if(empty($_SESSION['u_id'])){
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-24-hours"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">24 Hours Service</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			                <p>There are only 24 hours in each day. You can't make it 25 or 26. You just have to plan your activities very well.</p>
 			              </div>
 			            </div>      
 			          </div>
@@ -162,7 +163,7 @@ if(empty($_SESSION['u_id'])){
 		      </div>
 		      <div class="col-md-5 d-flex">
 	        	<div class="appointment-wrap bg-white p-4 p-md-5 d-flex align-items-center">
-		        	<form action="php/add-appointment.php" method="post" class="appointment-form ftco-animate">
+		        	<form action="php/add-appointment.php"  method="post" class="appointment-form ftco-animate">
 		        		<h3>Book an Appointment</h3>
 		    				
 		    				<div class="">
@@ -170,7 +171,7 @@ if(empty($_SESSION['u_id'])){
 			    					<div class="form-field">
 	          					<div class="select-wrap">
 	                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                      <select name="spec" id="spec" class="form-control">
+	                      <select name="spec" id="spec" class="form-control" required>
 	                      	<option value="">Select Your Services</option>
 							  <option>Allergology</option>
 							  <option>Anatomic Pathology</option>
@@ -198,7 +199,7 @@ if(empty($_SESSION['u_id'])){
 			    					<div class="form-field">
 	          					<div class="select-wrap">
 	                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                      <select name="doctor" id="dr" class="form-control">
+	                      <select name="doctor" id="dr" class="form-control" required>
 	                      	<option value="">Select Doctor</option>
 							 
 	                      </select>
@@ -211,14 +212,14 @@ if(empty($_SESSION['u_id'])){
 			    				<div class="form-group">
 			    					<div class="input-wrap">
 			            		
-			            		<input name="date" id="date" type="date" class="form-control" value="0-0-0" placeholder="Date">
+			            		<input name="date" id="date" type="date" class="form-control" value="0-0-0" placeholder="Date" required>
 		            		</div>
 			    				</div>
 								<div class="form-group">
 			    					<div class="form-field">
 	          					<div class="select-wrap">
 	                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                      <select name="time" id="time" class="form-control">
+	                      <select name="time" id="time" class="form-control" required>
 	                      	<option value="">Select Timing</option>
 							 
 	                      </select>
@@ -247,8 +248,8 @@ if(empty($_SESSION['u_id'])){
 				<div class="row justify-content-center">
 					<div class="col-md-9 text-center">
 						<h2>Your Health is Our Priority</h2>
-						<p>We can manage your dream building A small river named Duden flows by their place</p>
-						<p class="mb-0"><a href="#" class="btn btn-white px-4 py-3">Search Places</a></p>
+						<p>YOUR HEALTH IS SO IMPORTANT, AND SHOULD BE A PRIORITY IN YOUR LIFE. A LITTLE CARE EACH DAY GOES A LONG WAY. IF YOU NEGLECT YOUR HEALTH, YOU WILL HAVE NO CHOICE BUT TO ADDRESS IT, AT SOME POINT. HOPEFULLY, IT WON'T BE TOO LATE! </p>
+						
 					</div>
 				</div>
 			</div>
@@ -269,8 +270,8 @@ if(empty($_SESSION['u_id'])){
     								<div class="icon">
     									<span class="flaticon-stethoscope"></span>
     								</div>
-    								<h3><a href="#">Neurology</a></h3>
-    								<p>Far far away, behind the word mountains</p>
+    								<h3><a>Neurology</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
     							</div>
     						</div>
     						<div class="department-wrap p-4 ftco-animate">
@@ -278,8 +279,8 @@ if(empty($_SESSION['u_id'])){
     								<div class="icon">
     									<span class="flaticon-stethoscope"></span>
     								</div>
-    								<h3><a href="#">Surgical</a></h3>
-    								<p>Far far away, behind the word mountains</p>
+    								<h3><a>Surgical</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
     							</div>
     						</div>
     						<div class="department-wrap p-4 ftco-animate">
@@ -287,38 +288,8 @@ if(empty($_SESSION['u_id'])){
     								<div class="icon">
     									<span class="flaticon-stethoscope"></span>
     								</div>
-    								<h3><a href="#">Dental</a></h3>
-    								<p>Far far away, behind the word mountains</p>
-    							</div>
-    						</div>
-    					</div>
-
-    					<div class="col-md-4">
-    						<div class="department-wrap p-4 ftco-animate">
-    							<div class="text p-2 text-center">
-    								<div class="icon">
-    									<span class="flaticon-stethoscope"></span>
-    								</div>
-    								<h3><a href="#">Opthalmology</a></h3>
-    								<p>Far far away, behind the word mountains</p>
-    							</div>
-    						</div>
-    						<div class="department-wrap p-4 ftco-animate">
-    							<div class="text p-2 text-center">
-    								<div class="icon">
-    									<span class="flaticon-stethoscope"></span>
-    								</div>
-    								<h3><a href="#">Cardiology</a></h3>
-    								<p>Far far away, behind the word mountains</p>
-    							</div>
-    						</div>
-    						<div class="department-wrap p-4 ftco-animate">
-    							<div class="text p-2 text-center">
-    								<div class="icon">
-    									<span class="flaticon-stethoscope"></span>
-    								</div>
-    								<h3><a href="#">Traumatology</a></h3>
-    								<p>Far far away, behind the word mountains</p>
+    								<h3><a>Dental</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
     							</div>
     						</div>
     					</div>
@@ -329,8 +300,8 @@ if(empty($_SESSION['u_id'])){
     								<div class="icon">
     									<span class="flaticon-stethoscope"></span>
     								</div>
-    								<h3><a href="#">Nuclear Magnetic</a></h3>
-    								<p>Far far away, behind the word mountains</p>
+    								<h3><a>Opthalmology</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
     							</div>
     						</div>
     						<div class="department-wrap p-4 ftco-animate">
@@ -338,8 +309,8 @@ if(empty($_SESSION['u_id'])){
     								<div class="icon">
     									<span class="flaticon-stethoscope"></span>
     								</div>
-    								<h3><a href="#">X-ray</a></h3>
-    								<p>Far far away, behind the word mountains</p>
+    								<h3><a>Cardiology</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
     							</div>
     						</div>
     						<div class="department-wrap p-4 ftco-animate">
@@ -347,8 +318,38 @@ if(empty($_SESSION['u_id'])){
     								<div class="icon">
     									<span class="flaticon-stethoscope"></span>
     								</div>
-    								<h3><a href="#">Cardiology</a></h3>
-    								<p>Far far away, behind the word mountains</p>
+    								<h3><a>Traumatology</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
+    							</div>
+    						</div>
+    					</div>
+
+    					<div class="col-md-4">
+    						<div class="department-wrap p-4 ftco-animate">
+    							<div class="text p-2 text-center">
+    								<div class="icon">
+    									<span class="flaticon-stethoscope"></span>
+    								</div>
+    								<h3><a>Nuclear Magnetic</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
+    							</div>
+    						</div>
+    						<div class="department-wrap p-4 ftco-animate">
+    							<div class="text p-2 text-center">
+    								<div class="icon">
+    									<span class="flaticon-stethoscope"></span>
+    								</div>
+    								<h3><a>X-ray</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
+    							</div>
+    						</div>
+    						<div class="department-wrap p-4 ftco-animate">
+    							<div class="text p-2 text-center">
+    								<div class="icon">
+    									<span class="flaticon-stethoscope"></span>
+    								</div>
+    								<h3><a>Cardiology</a></h3>
+    								<p>Always laugh when you can, it is cheap medicine.</p>
     							</div>
     						</div>
     					</div>
@@ -363,7 +364,7 @@ if(empty($_SESSION['u_id'])){
 				<div class="row justify-content-center mb-5 pb-2">
           <div class="col-md-8 text-center heading-section ftco-animate">
             <h2 class="mb-4">Our Qualified Doctors</h2>
-            <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
+            <p>There are only two sorts of doctors: those who practice with their brains, and those who practice with their tongues.</p>
           </div>
         </div>	
 				<div class="row">
@@ -389,12 +390,12 @@ if(empty($_SESSION['u_id'])){
 								<div class="faded">
 									<p>I am an ambitious workaholic, but apart from that, pretty simple person.</p>
 									<ul class="ftco-social text-center">
-		                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-		                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-		                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-		                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+		                <li class="ftco-animate"><a><span class="icon-twitter"></span></a></li>
+		                <li class="ftco-animate"><a><span class="icon-facebook"></span></a></li>
+		                <li class="ftco-animate"><a><span class="icon-google-plus"></span></a></li>
+		                <li class="ftco-animate"><a><span class="icon-instagram"></span></a></li>
 		              </ul>
-		              <p><a href="#" class="btn btn-primary">Book now</a></p>
+		              <p><a href="#app" class="btn btn-primary">Book now</a></p>
 	              </div>
 							</div>
 						</div>
@@ -407,14 +408,25 @@ if(empty($_SESSION['u_id'])){
 				</div>
 			</div>
 		</section>
-
+		<?php
+					
+					$sql1 = "Select (select count(*) from doctors) as count1, (select count(*) from patients) as count2,
+					(select count(*) from nurses) as count3,
+					 (select count(*) from labtech) as count4, (select count(*) from radiotech) as count5;";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
 		<section class="ftco-facts img ftco-counter" style="background-image: url(images/bg_3.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row d-flex align-items-center">
 					<div class="col-md-5 heading-section heading-section-white">
 						<span class="subheading">Fun facts</span>
-						<h2 class="mb-4">Over 5,100 patients trust us</h2>
+						<h2 class="mb-4">Over <?php print($row["count2"]);?> patients trust us</h2>
 						<p class="mb-0"><a href="#app" class="btn btn-secondary px-4 py-3">Make an appointment</a></p>
 					</div>
 					<div class="col-md-7">
@@ -422,7 +434,7 @@ if(empty($_SESSION['u_id'])){
 		          <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
 		            <div class="block-18">
 		              <div class="text">
-		                <strong class="number" data-number="30">0</strong>
+		                <strong class="number" data-number="1">0</strong>
 		                <span>Years of Experienced</span>
 		              </div>
 		            </div>
@@ -430,7 +442,7 @@ if(empty($_SESSION['u_id'])){
 		          <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
 		            <div class="block-18">
 		              <div class="text">
-		                <strong class="number" data-number="4500">0</strong>
+		                <strong class="number" data-number="<?php echo $row["count2"];?>">0</strong>
 		                <span>Happy Patients</span>
 		              </div>
 		            </div>
@@ -438,7 +450,7 @@ if(empty($_SESSION['u_id'])){
 		          <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
 		            <div class="block-18">
 		              <div class="text">
-		                <strong class="number" data-number="84">0</strong>
+		                <strong class="number" data-number="<?php echo $row["count1"];?>">0</strong>
 		                <span>Number of Doctors</span>
 		              </div>
 		            </div>
@@ -446,7 +458,7 @@ if(empty($_SESSION['u_id'])){
 		          <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
 		            <div class="block-18">
 		              <div class="text">
-		                <strong class="number" data-number="300">0</strong>
+		                <strong class="number" data-number="<?php echo $row["count3"]+$row["count4"]+$row["count5"];?>">0</strong>
 		                <span>Number of Staffs</span>
 		              </div>
 		            </div>
@@ -458,7 +470,7 @@ if(empty($_SESSION['u_id'])){
 		</section>
 
 
-    <section class="ftco-section bg-light" id="blog-section">
+		<section class="ftco-section bg-light" id="blog-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
           <div class="col-md-10 heading-section text-center ftco-animate">
@@ -480,17 +492,17 @@ if(empty($_SESSION['u_id'])){
 		?>
         	<div class="col-md-4 ftco-animate">
             <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../admin/images/<?php echo $row['image'];?>');">
+              <a class="block-20" style="background-image: url('../admin/images/<?php echo $row['image'];?>');">
               </a>
               <div class="text d-block">
               	<div class="meta mb-3">
-                  <div><a href="#">June 9, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
+                  <div><a><?php echo date(' F d, Y',strtotime($row['date']));?></a></div>
+                  <div><a>Admin</a></div>
                   
                 </div>
-                <h3 class="heading"><a href="#"><?php echo $row['name'];?></a></h3>
+                <h3 class="heading"><a><?php echo $row['name'];?></a></h3>
                 <p><?php echo $row['description'];?></p>
-                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>
+                <p class="btn btn-primary py-2 px-3">Read more</p>
               </div>
             </div>
         	</div>
@@ -552,33 +564,14 @@ if(empty($_SESSION['u_id'])){
           			<span class="icon-globe"></span>
           		</div>
           		<h3 class="mb-4">Website</h3>
-	            <p><a href="#">MedLife.com</a></p>
+	            <p><a>MedLife.com</a></p>
 	          </div>
           </div>
         </div>
         <div class="row no-gutters block-9">
-          <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-light p-5 contact-form">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
-              </div>
-              <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-secondary py-3 px-5">
-              </div>
-            </form>
-          
-          </div>
+         
 
-          <div class="col-md-6 d-flex">
+          <div class="col-md-12 d-flex">
           	<div id="map" class="bg-white"></div>
           </div>
         </div>
@@ -592,11 +585,11 @@ if(empty($_SESSION['u_id'])){
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">MedLife</h2>
-              <p>Far far away, behind the word mountains, far from the countries.</p>
+              <p>Hospitals are only an intermediate stage of civilization, never intended at all even to take in the whole sick population.</p>
               <ul class="ftco-footer-social list-unstyled mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
@@ -608,9 +601,9 @@ if(empty($_SESSION['u_id'])){
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">Khiara, West Beqaa, Lebanon</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+961 71 696 574</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope pr-4"></span><span class="text">MedLife@info.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Khiara, West Bekaa, Lebanon</span></li>
+	                <li><a><span class="icon icon-phone"></span><span class="text">+961 71 696 574</span></a></li>
+	                <li><a><span class="icon icon-envelope pr-4"></span><span class="text">MedLife@info.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -628,7 +621,12 @@ if(empty($_SESSION['u_id'])){
 	  $(document).ready(function () {
     $("#spec").change(function () {
 		$('#dr').empty();
+		var ele = document.getElementById('dr');
+		ele.innerHTML = ele.innerHTML +'<option value="">Select Doctor</option>';
+		
 		$('#time').empty();
+		var ele = document.getElementById('time');
+		ele.innerHTML = ele.innerHTML + '<option value="">Select Timing</option>';
 		$('#date').val('')
     .attr('type', 'text')
     .attr('type', 'date');
@@ -668,6 +666,8 @@ if(empty($_SESSION['u_id'])){
 
 	$("#dr").change(function () {
 		$('#time').empty();
+		var ele = document.getElementById('time');
+		ele.innerHTML = ele.innerHTML + '<option value="">Select Timing</option>';
 		$('#date').val('')
     .attr('type', 'text')
     .attr('type', 'date');
@@ -677,6 +677,8 @@ if(empty($_SESSION['u_id'])){
 
 	$("#date").change(function () {
 		$('#time').empty();
+		var ele = document.getElementById('time');
+		ele.innerHTML = ele.innerHTML + '<option value="">Select Timing</option>';
 		console.log($('#date').val());
 			async function timefetchAPI(){
 				
@@ -699,7 +701,7 @@ if(empty($_SESSION['u_id'])){
 	
 
 				
-	function dropdown(results){
+				function dropdown(results){
 		var ele = document.getElementById('time');
         for (var i = 0; i < results.length; i++) {
             // POPULATE SELECT ELEMENT WITH JSON.

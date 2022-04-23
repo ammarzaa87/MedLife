@@ -98,7 +98,7 @@ if(empty($_SESSION['a_id'])){
 						 <li class="submenu">
                             <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
-                                <li><a class="active" href="#">Blogs</a></li>
+                                <li><a class="active" href="">Blogs</a></li>
                                 <li><a  href="add-blog.php">Add Blog</a></li>
                                 
                             </ul>
@@ -145,9 +145,7 @@ if(empty($_SESSION['a_id'])){
                                 <p> <?php echo $row["description"];?></p>
                                 
                                 <div class="blog-info clearfix">
-                                    <div class="post-left">
-                                        
-                                    </div>
+                                    
                                     <div class="post-right"><a href="php/delete-blog.php?blog_id=<?php echo $row['id'];?>"><i class="fa fa-trash-o m-r-5"> Delete </i></a> </div>
                                 </div>
                             </div>

@@ -20,7 +20,7 @@ if(isset($_POST["desc"]) && $_POST["desc"] != "") {
 }else{
     die ("description is required");
 }
-
+$date=date("Y-m-d");
 if (isset($_FILES['my_image'])) {
 echo "<pre>";
 	print_r($_FILES['my_image']);

@@ -69,7 +69,7 @@ if(empty($_SESSION['a_id'])){
                             <a href="admin.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 						<li class="active">
-                            <a href="#"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                            <a href=""><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
                         <li>
                             <a href="patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
@@ -118,7 +118,7 @@ if(empty($_SESSION['a_id'])){
             </div>
         </div>
 
-        
+        <input type="hidden" id="drid">
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -150,7 +150,7 @@ if(empty($_SESSION['a_id'])){
                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="edit-doctor.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a id="delete" class="dropdown-item" href="php/delete-doctor.php?dr_id=<?php echo $row['id'];?>" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                    <a class="dropdown-item" data-role="delete" data-toggle="modal" data-id="<?php echo $row['id'];?>" data-target="#delete_doctor" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                 </div>
                             </div>
                             <h4 class="doctor-name text-ellipsis"><a href="profile.html"><?php echo $row["first_name"]," ", $row["last_name"];?></a></h4>
@@ -181,7 +181,19 @@ if(empty($_SESSION['a_id'])){
 
 
 		
-
+        <div id="delete_doctor" class="modal fade delete-modal" role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="assets/img/sent.png" alt="" width="50" height="46">
+						<h3>Are you sure want to delete this Doctor?</h3>
+						<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+							<button type="submit" id="delete" class="btn btn-danger">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	
 		
     </div>
@@ -194,6 +206,21 @@ if(empty($_SESSION['a_id'])){
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
+	$(document).on('click','a[data-role=delete]',function(){
+		var id = $(this).data('id');
+		$('#drid').val(id);
+		
+	})
+    $(document).on('click','#delete',function(){
+	//alert($(this).data('id'));
+	var id = $('#drid').val();
+   location.replace("php/delete-doctor.php?dr_id="+id)
+});
+
+});
+</script>
 </body>
 
 

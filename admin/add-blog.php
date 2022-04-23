@@ -97,11 +97,11 @@ if(empty($_SESSION['a_id'])){
 						
 						
 						 <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
+                            <a href=""><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="blogs.php">Blogs</a></li>
                                 
-                                <li><a class="active" href="#">Add Blog</a></li>
+                                <li><a class="active" href="">Add Blog</a></li>
                                 
                             </ul>
                         </li>
@@ -134,7 +134,7 @@ if(empty($_SESSION['a_id'])){
                                 <label>Blog Image</label>
                                 <div>
                                     <input class="form-control" type="file" name="my_image" >
-                                    <small class="form-text text-muted">Max. file size: 50 MB. Allowed images: jpg, gif, png.</small>
+                                    <small class="form-text text-muted">Max. file size: 50 MB. Allowed images: jpg, jpeg, png.</small>
                                 </div>
 
 

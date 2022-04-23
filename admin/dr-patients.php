@@ -75,7 +75,7 @@ if(empty($_SESSION['d_id'])){
                         </li>
 						
                         <li class="active">
-                            <a href="#"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            <a href=""><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
 						
 					

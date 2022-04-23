@@ -100,7 +100,7 @@ if(empty($_SESSION['a_id'])){
                     <ul>
                         <li class="menu-title">Main</li>
                         <li class="active">
-                            <a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href=""><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 						<li>
                             <a href="doctors.php"><i class="fa fa-user-md"></i> <span>Doctors</span></a>

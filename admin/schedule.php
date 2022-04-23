@@ -87,7 +87,7 @@ if(empty($_SESSION['a_id'])){
                             <a href="appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
                         <li class="active">
-                            <a href="#"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                            <a href=""><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
                         </li>
                        
 						
@@ -141,7 +141,7 @@ if(empty($_SESSION['a_id'])){
 								<tbody>
                                 <?php
 					
-                    $sql1 = "SELECT D.first_name, D.last_name,D.speciality,H.date,T.fromm,T.too FROM has_time AS H, doctors AS D, timing AS T WHERE H.doctor_id=D.id AND H.timing_id=T.id;";
+                    $sql1 = "SELECT H.id,D.first_name, D.last_name,D.speciality,H.date,T.fromm,T.too FROM has_time AS H, doctors AS D, timing AS T WHERE H.doctor_id=D.id AND H.timing_id=T.id;";
                     $stmt1 = $connection->prepare($sql1);
                     $stmt1->execute();
                      $result = $stmt1->get_result();
@@ -152,7 +152,7 @@ if(empty($_SESSION['a_id'])){
 									<tr>
 										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""><?php echo $row['first_name']," ",$row['last_name'];?></td>
 										<td><?php echo $row['speciality'];?></td>
-										<td><?php echo $row['date'];?></td>
+										<td><?php echo date("d-m-Y", strtotime($row["date"]));?></td>
 										<td><?php echo $row["fromm"]." - ".$row["too"];?></td>
 										
 										<td class="text-right">

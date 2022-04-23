@@ -86,7 +86,7 @@ if(empty($_SESSION['a_id'])){
                             <a href="nurse.php"><i class="fa fa-heartbeat"></i> <span>Nurses</span></a>
                         </li>
                         <li class="active">
-                            <a href="#"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                            <a href=""><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
                         <li>
                             <a href="schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
@@ -152,7 +152,7 @@ if(empty($_SESSION['a_id'])){
 					
                             $sql1 = "SELECT A.id, D.first_name,D.last_name,D.speciality,P.fname,P.lname,P.birth,T.fromm,T.too,A.date, A.status
                              FROM appointments AS A, patients AS P, timing AS T , doctors AS D WHERE A.patient_ssn=P.ssn
-                              AND A.time_id=T.id AND A.dr_id=D.id;";
+                              AND A.time_id=T.id AND A.dr_id=D.id order by status DESC;";
                             $stmt1 = $connection->prepare($sql1);
                             $stmt1->execute();
                             $result = $stmt1->get_result();
@@ -170,7 +170,7 @@ if(empty($_SESSION['a_id'])){
 										<td><?php echo $age;?></td>
 										<td><?php echo $row["first_name"]," ", $row["last_name"];?></td>
 										<td><?php echo $row['speciality'];?></td>
-										<td><?php echo $row['date'];?></td>
+										<td><?php echo date("d-m-Y", strtotime($row["date"]));?></td>
 										<td><?php echo $row["fromm"]," ", $row["too"];?></td>
 										<td><span class="custom-badge status-<?php echo( $row["status"]==1 ? 'green' : 'red' );?>"><?php echo( $row["status"]==1 ? 'On Progress' : 'Done' );?></span></td>
 										<td class="text-right">

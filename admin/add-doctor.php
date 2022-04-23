@@ -147,14 +147,14 @@ if(empty($_SESSION['a_id'])){
                                     <div class="form-group">
                                         <label>ID <span class="text-danger">*</span></label>
                                         <?php
-					/* If email is already taken, print a danger alert that tells "email is already taken"*/
-                                    if (!empty($_SESSION["flash"])){
+					/* If ID is already taken, print a danger alert that tells "ID is already taken"*/
+                                    if (!empty($_SESSION["add-dr-flash"])){
                                     ?>
                                     <div class="alert alert-danger" role="alert">
                                     <?php
-                                    $x = $_SESSION["flash"];
+                                    $x = $_SESSION["add-dr-flash"];
                                     echo $x;
-                                    $_SESSION["flash"] = "";
+                                    $_SESSION["add-dr-flash"] = "";
                                     
                                 
                                     ?>
@@ -315,6 +315,7 @@ if(empty($_SESSION['a_id'])){
             </div>
 			
         </div>
+        
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>

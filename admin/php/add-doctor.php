@@ -137,7 +137,7 @@ if(empty($row)){
 }
 else{
     session_start();
-    $_SESSION["flash"] = "ID already exists";
+    $_SESSION["add-dr-flash"] = "ID already exists";
     header('location: ../add-doctor.php');
 }
 ?>

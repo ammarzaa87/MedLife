@@ -184,8 +184,9 @@ if(empty($_SESSION['d_id'])){
 				<div class="profile-tabs">
                 <ul class="nav nav-tabs nav-tabs-bottom">
 						<li class="nav-item"><a class="nav-link active" href="#about-cont" data-toggle="tab">Medical File</a></li>
-						<li class="nav-item"><a class="nav-link" href="#bottom-tab2" data-toggle="tab">Medical Tests</a></li>
-						
+						<li class="nav-item"><a class="nav-link" href="#bottom-tab2" data-toggle="tab">Lab Tests</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#bottom-tab3" data-toggle="tab">Radio Tests</a></li>
+						<li class="nav-item"><a class="nav-link" href="#bottom-tab4" data-toggle="tab">Pending Medical Tests</a></li>
 					</ul>
 
 					<div class="tab-content">
@@ -197,8 +198,163 @@ if(empty($_SESSION['d_id'])){
                 </div>
 						</div>
                         <div class="tab-pane" id="bottom-tab2">
-							Tab content 2
+                        <?php
+					
+                    $sql1 = "SELECT * FROM add_lab_res AS L, labtests AS T WHERE L.labtest_id=T.id;";
+                    $stmt1 = $connection->prepare($sql1);
+                    $stmt1->execute();
+                     $result = $stmt1->get_result();
+                     while($row = $result->fetch_assoc()) {
+                         
+                         
+                         ?>
+                        <div class="card-box">
+                           
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                   
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name"><?php echo $row["name"];?></a>
+                                                <a class="btn btn-primary btn-rounded float-right" target="_blank" href="tests/<?php echo $row["file"];?>">View Test</a>
+                                                <span class="time"><?php echo date("d-m-Y", strtotime($row["date"]));?></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php
+					}
+				   ?>
+
+
+                      
+
+
 						</div>
+                        <div class="tab-pane" id="bottom-tab3">
+							
+
+                        
+                        <?php
+					
+                    $sql1 = "SELECT * FROM add_radio_res AS L, radios AS R WHERE L.radio_id=R.id;";
+                    $stmt1 = $connection->prepare($sql1);
+                    $stmt1->execute();
+                     $result = $stmt1->get_result();
+                     while($row = $result->fetch_assoc()) {
+                         
+                         
+                         ?>
+                        <div class="card-box">
+                           
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                   
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name"><?php echo $row["name"];?></a>
+                                                <a class="btn btn-primary btn-rounded float-right" target="_blank" href="tests/<?php echo $row["file"];?>">View Test</a>
+                                                <span class="time"><?php echo date("d-m-Y", strtotime($row["date"]));?></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php
+					}
+				   ?>
+
+						</div>
+                        <div class="tab-pane" id="bottom-tab4">
+							
+
+                        
+                      
+                        <div class="card-box">
+                           
+                            <div class="experience-box">
+                            <h3 class="card-title">Lab Tests</h3>
+                                <ul class="experience-list">
+                                <?php
+					
+                    $sql1 = "SELECT * FROM dolab AS D, labtests AS L WHERE D.labtest_id=L.id AND D.status=1;";
+                    $stmt1 = $connection->prepare($sql1);
+                    $stmt1->execute();
+                     $result = $stmt1->get_result();
+                     while($row = $result->fetch_assoc()) {
+                         
+                         
+                         ?>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name"><?php echo $row["name"];?></a>
+                                               
+                                                <span class="time"><?php echo date("d-m-Y", strtotime($row["date"]));?></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <?php
+					}
+				   ?>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div class="card-box">
+                           
+                            <div class="experience-box">
+                            <h3 class="card-title">Radio Tests</h3>
+                                <ul class="experience-list">
+                                <?php
+					
+                    $sql1 = "SELECT * FROM doradio AS D, radios AS L WHERE D.radio_id=L.id AND D.status=1;";
+                    $stmt1 = $connection->prepare($sql1);
+                    $stmt1->execute();
+                     $result = $stmt1->get_result();
+                     while($row = $result->fetch_assoc()) {
+                         
+                         
+                         ?>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name"><?php echo $row["name"];?></a>
+                                               
+                                                <span class="time"><?php echo date("d-m-Y", strtotime($row["date"]));?></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <?php
+					}
+				   ?>
+                                </ul>
+                            </div>
+                        </div>
+                     
+
+
+                          
+                            
+                            </div>
 						
 						
 					</div>
@@ -282,6 +438,9 @@ function buildTable(data){
 }
 
 </script>
+
+
+
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/popper.min.js"></script>

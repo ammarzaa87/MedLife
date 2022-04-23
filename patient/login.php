@@ -9,7 +9,7 @@
     ></script>
     <link rel="stylesheet" href="assets/style0.css" />
       
-    <title>Sign in & Sign up Form</title>
+    <title>Sign in & Sign up</title>
   </head>
   <body>
     <div class="container">

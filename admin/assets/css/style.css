@@ -3532,7 +3532,7 @@ table.table-inbox tbody tr.checked {
 	display: block;
 	position: relative;
 	width: 100%;
-	height: auto;
+	height: 250px;
 }
 .blog-image img {
 	-moz-transform: scaleY(1);

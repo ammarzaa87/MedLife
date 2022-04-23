@@ -1,4 +1,5 @@
 <?php
+include "php/connection.php";
 session_start();
 if(empty($_SESSION['l_id'])){
     header("Location: index.php");
@@ -86,6 +87,34 @@ if(empty($_SESSION['l_id'])){
                 </div>
             </div>
         </div>
+
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+   
+    <form enctype="multipart/form-data" id="data"  method="POST" action="php/add-test.php">
+      <div class="modal-body">
+      <label>Test Number</label>
+     <input type="ssn" id="ssn" name="id" class="form-control" readonly>
+      </div>
+     
+	  <div class="modal-body">
+      <input class="form-control" type="file" name="my_file" id="my_file" required>
+        <small class="form-text text-muted">Max. file size: 50 MB. Allowed images: jpg, gif, png.</small>
+    
+	  </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="butsave" type="submit" class="btn btn-primary">Add</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -97,45 +126,55 @@ if(empty($_SESSION['l_id'])){
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive">
+                      
 							<table class="table table-striped custom-table">
 								<thead>
 									<tr>
 										<th>Lab Test ID</th>
 										<th>Patient Name</th>
 										<th>Age</th>
-										<th>Doctor Name</th>
-										<th>Department</th>
-										<th>Appointment Date</th>
-										<th>Appointment Time</th>
-										<th>Status</th>
+                                        <th>Test Name</th>
+										<th>Test Date</th>
 										
+										<th>Add</th>
 									</tr>
 								</thead>
+                                
 								<tbody>
+                                <?php
+					
+				   $sql1 = "SELECT D.id,D.date, P.fname,P.lname,P.birth,L.name 
+                   FROM dolab AS D,patients AS P, labtests AS L WHERE D.labtest_id=L.id AND D.patient_ssn=P.ssn AND D.status=1;";
+				   $stmt1 = $connection->prepare($sql1);
+				   $stmt1->execute();
+					$result = $stmt1->get_result();
+					while($row = $result->fetch_assoc()) {
+						$dateOfBirth = $row["birth"];;
+                                    $today = date("Y-m-d");
+                                    $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                                    $age = $diff->format('%y');
+						
+						?>
 									<tr>
-										<td>APT0001</td>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> Denise Stevens</td>
-										<td>35</td>
-										<td>Henry Daniels</td>
-										<td>Cardiology</td>
-										<td>30 Dec 2018</td>
-										<td>10:00am - 11:00am</td>
-										<td><span class="custom-badge status-red">Inactive</span></td>
+										<td>TEST<?php echo $row["id"];?></td>
+										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> <?php echo $row["fname"]," ", $row["lname"];?></td>
+										<td><?php echo $age;?></td>
 										
-									</tr>
-									<tr>
-										<td>APT0002</td>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> Denise Stevens</td>
-										<td>35</td>
-										<td>Henry Daniels</td>
-										<td>Cardiology</td>
-										<td>30 Dec 2018</td>
-										<td>10:00am - 11:00am</td>
-										<td><a href="medfile.php"><span class="custom-badge status-green">Active</span></a></td>
+										<td><?php echo $row["name"];?></td>
+										<td><?php echo date("d-m-Y", strtotime($row["date"]));?></td>
 										
+										
+										<td><button type="button" class="btn-primary" data-role="update" data-toggle="modal" data-id="<?php echo $row["id"];?>" data-target="#AddModal">Add File</button></td>
 									</tr>
+                                    <?php
+					}
+				   ?>
+                                
+									
 								</tbody>
+                               
 							</table>
+                            
 						</div>
 					</div>
                 </div>
@@ -154,16 +193,25 @@ if(empty($_SESSION['l_id'])){
     <script src="assets/js/jquery.slimscroll.js"></script>
     <script src="assets/js/select2.min.js"></script>
     <script src="assets/js/app.js"></script>
-	<script>
-            $(function () {
-                $('#datetimepicker3').datetimepicker({
-                    format: 'LT'
-                });
-				$('#datetimepicker4').datetimepicker({
-                    format: 'LT'
-                });
-            });
-     </script>
+    <script>
+$(document).ready(function(){
+	$(document).on('click','button[data-role=update]',function(){
+		var id = $(this).data('id');
+        $('#ssn').val(id);
+		
+		
+	})
+});
+$('#butsave').on('click', function() {
+    var postData = new FormData($("#modal_form_id")[0]);
+    var ssn = $('#ssn').html();
+    
+
+     
+	});
+
+
+</script>
 </body>
 
 

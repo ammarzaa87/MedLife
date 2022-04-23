@@ -163,8 +163,8 @@ if(empty($_SESSION['d_id'])){
         var month = d.getMonth()+1;
         var day = d.getDate();
 
-        var date = d.getFullYear() + '/' +
-            (month<10 ? '0' : '') + month + '/' +
+        var date = d.getFullYear() + '-' +
+            (month<10 ? '0' : '') + month + '-' +
             (day<10 ? '0' : '') + day;
 		if(presc!="" && dia!=""){
 			$.ajax({

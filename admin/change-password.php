@@ -110,7 +110,7 @@ if(empty($_SESSION['a_id'])){
                      
 						
                         <li class="active">
-                            <a href="#"><i class="fa fa-lock"></i> <span>Change Password</span></a>
+                            <a href=""><i class="fa fa-lock"></i> <span>Change Password</span></a>
                         </li>
                        
                       
