@@ -45,9 +45,8 @@ if(empty($_SESSION['a_id'])){
                         <span>Admin</span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+                      <a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
@@ -55,10 +54,9 @@ if(empty($_SESSION['a_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                <a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -118,7 +116,7 @@ if(empty($_SESSION['a_id'])){
         </div>
 
 
-
+        <input type="hidden" id="appid">
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -149,10 +147,10 @@ if(empty($_SESSION['a_id'])){
 
 									
 			        	<?php
-					
-                            $sql1 = "SELECT A.id, D.first_name,D.last_name,D.speciality,P.fname,P.lname,P.birth,T.fromm,T.too,A.date, A.status
+					$date= date('y-m-d');
+                            $sql1 = "SELECT A.id, D.first_name,D.last_name,D.speciality,P.fname,P.lname,P.birth,T.fromm,T.too,A.date,A.time_id, A.status
                              FROM appointments AS A, patients AS P, timing AS T , doctors AS D WHERE A.patient_ssn=P.ssn
-                              AND A.time_id=T.id AND A.dr_id=D.id order by status DESC;";
+                              AND A.time_id=T.id AND A.dr_id=D.id AND A.date>='$date' order by A.date,A.time_id,A.status DESC;";
                             $stmt1 = $connection->prepare($sql1);
                             $stmt1->execute();
                             $result = $stmt1->get_result();
@@ -178,7 +176,7 @@ if(empty($_SESSION['a_id'])){
 												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
 												<div class="dropdown-menu dropdown-menu-right">
 													<a class="dropdown-item" href="edit-appointment.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-													<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_appointment"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+													<a class="dropdown-item" data-role="delete" data-toggle="modal" data-id="<?php echo $row['id'];?>" data-target="#delete_appointment" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 												</div>
 											</div>
 										</td>
@@ -197,20 +195,22 @@ if(empty($_SESSION['a_id'])){
 
 
             
-			<div id="delete_appointment" class="modal fade delete-modal" role="dialog">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-body text-center">
-							<img src="assets/img/sent.png" alt="" width="50" height="46">
-							<h3>Are you sure want to delete this Appointment?</h3>
-							<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-								<button type="submit" class="btn btn-danger">Delete</button>
-							</div>
+			
+            <div id="delete_appointment" class="modal fade delete-modal" role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="assets/img/sent.png" alt="" width="50" height="46">
+						<h3>Are you sure want to delete this Appointment?</h3>
+						<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+							<button type="submit" id="delete" class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		</div>
+
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -219,16 +219,22 @@ if(empty($_SESSION['a_id'])){
     <script src="assets/js/jquery.slimscroll.js"></script>
     <script src="assets/js/select2.min.js"></script>
     <script src="assets/js/app.js"></script>
-	<script>
-            $(function () {
-                $('#datetimepicker3').datetimepicker({
-                    format: 'LT'
-                });
-				$('#datetimepicker4').datetimepicker({
-                    format: 'LT'
-                });
-            });
-     </script>
+	
+        <script type="text/javascript">
+$(document).ready(function(){
+	$(document).on('click','a[data-role=delete]',function(){
+		var id = $(this).data('id');
+		$('#appid').val(id);
+		
+	})
+    $(document).on('click','#delete',function(){
+	//alert($(this).data('id'));
+	var id = $('#appid').val();
+   location.replace("php/delete-appoin.php?ap_id="+id)
+});
+
+});
+</script>
 </body>
 
 

@@ -47,9 +47,8 @@ if(empty($_SESSION['a_id'])){
                         <span>Admin</span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
@@ -57,10 +56,9 @@ if(empty($_SESSION['a_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                <a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -126,12 +124,12 @@ if(empty($_SESSION['a_id'])){
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
                         <h4 class="page-title">Change Password</h4>
-                        <form>
+                        <form action="php/change-password.php" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Old password</label>
-                                        <input type="password" class="form-control">
+                                        <input id="old" name="old" type="password" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -139,19 +137,19 @@ if(empty($_SESSION['a_id'])){
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>New password</label>
-                                        <input type="password" class="form-control">
+                                        <input name="new" type="password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Confirm password</label>
-                                        <input type="password" class="form-control">
+                                        <input name="confirm" type="password" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 text-center m-t-20">
-                                    <button type="button" class="btn btn-primary submit-btn">Update Password</button>
+                                    <button class="btn btn-primary submit-btn">Update Password</button>
                                 </div>
                             </div>
                         </form>

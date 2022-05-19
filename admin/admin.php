@@ -34,39 +34,7 @@ if(empty($_SESSION['a_id'])){
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
-                <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
-                        </div>
-                        <div class="drop-scroll">
-                            <ul class="notification-list">
-                               
-                               
-                                
-                               
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                               
-                                
-
-
-                            </ul>
-                        </div>
-                        
-                    </div>
-                </li>
+                
                
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
@@ -78,8 +46,7 @@ if(empty($_SESSION['a_id'])){
                     </a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
@@ -87,9 +54,8 @@ if(empty($_SESSION['a_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
+				<a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="change-password.php">Change Password</a>
                     <a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
@@ -244,7 +210,7 @@ if(empty($_SESSION['a_id'])){
 					<div class="col-12 col-md-6 col-lg-8 col-xl-8">
 						<div class="card">
 							<div class="card-header">
-								<h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="appointments.html" class="btn btn-primary float-right">View all</a>
+								<h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="appointments.php" class="btn btn-primary float-right">View all</a>
 							</div>
 							<div class="card-body p-0">
 								<div class="table-responsive">
@@ -254,95 +220,46 @@ if(empty($_SESSION['a_id'])){
 												<th>Patient Name</th>
 												<th>Doctor Name</th>
 												<th>Timing</th>
-												<th class="text-right">Status</th>
+												
 											</tr>
 										</thead>
 										<tbody>
+										<?php
+					
+					$sql1 = "SELECT A.id, D.first_name,D.last_name,P.fname,P.lname,P.address,P.ssn,T.fromm,T.too,A.date
+					FROM appointments AS A, patients AS P, timing AS T , doctors AS D WHERE A.patient_ssn=P.ssn
+					 AND A.time_id=T.id AND A.dr_id=D.id ORDER BY A.id DESC LIMIT 5";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 while($row = $result->fetch_assoc()) {
+						 
+						 
+						 ?>
+										
 											<tr>
 												<td style="min-width: 200px;">
 													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
+													<h2><a href="patient_profile.php?ssn=<?php echo $row["ssn"];?>"><?php echo $row["fname"]," ", $row["lname"];?> <span><?php echo $row["address"];?></span></a></h2>
 												</td>                 
 												<td>
 													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
+													<p>Dr. <?php echo $row["first_name"]," ", $row["last_name"];?></p>
+												</td>
+												<td>
+													<h5 class="time-title p-0">Date</h5>
+													<p><?php echo date("d-m-Y", strtotime($row["date"]));?></p>
 												</td>
 												<td>
 													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
+													<p><?php echo $row["fromm"]," ", $row["too"];?></p>
 												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
+												
 											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
+											<?php
+					}
+				   ?>
+
 										</tbody>
 									</table>
 								</div>
@@ -356,76 +273,38 @@ if(empty($_SESSION['a_id'])){
 							</div>
                             <div class="card-body">
                                 <ul class="contact-list">
+                                   
+                                 
+                                 
+								<?php
+					
+					$sql1 = "SELECT * FROM `doctors`";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 while($row = $result->fetch_assoc()) {
+						 
+						 
+						 ?>
                                     <li>
                                         <div class="contact-cont">
                                             <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                                <a  title="Richard Miles"><img src="images/<?php echo $row['profile'];?>" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
                                             </div>
                                             <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">MBBS, MD</span>
+                                                <span class="contact-name text-ellipsis"><?php echo $row["first_name"]," ", $row["last_name"];?></span>
+                                                <span class="contact-date"><?php echo $row["speciality"];?></span>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">BMBS</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="John Doe"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status offline"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">John Doe</span>
-                                                <span class="contact-date">MBBS</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="contact-cont">
-                                            <div class="float-left user-img m-r-10">
-                                                <a href="profile.html" title="Richard Miles"><img src="assets/img/user.jpg" alt="" class="w-40 rounded-circle"><span class="status away"></span></a>
-                                            </div>
-                                            <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">Richard Miles</span>
-                                                <span class="contact-date">MBBS, MD</span>
-                                            </div>
-                                        </div>
-                                    </li>
+									<?php
+					}
+				   ?>
+
                                 </ul>
                             </div>
                             <div class="card-footer text-center bg-white">
-                                <a href="doctors.html" class="text-muted">View all Doctors</a>
+                                <a href="doctors.php" class="text-muted">View all Doctors</a>
                             </div>
                         </div>
                     </div>
@@ -434,48 +313,35 @@ if(empty($_SESSION['a_id'])){
 					<div class="col-12 col-md-6 col-lg-8 col-xl-8">
 						<div class="card">
 							<div class="card-header">
-								<h4 class="card-title d-inline-block">New Patients </h4> <a href="patients.html" class="btn btn-primary float-right">View all</a>
+								<h4 class="card-title d-inline-block">New Patients </h4> <a href="patients.php" class="btn btn-primary float-right">View all</a>
 							</div>
 							<div class="card-block">
 								<div class="table-responsive">
 									<table class="table mb-0 new-patient-table">
 										<tbody>
+										
+										<?php
+                                    
+									$sql1 = "SELECT * FROM `patients` ORDER BY id DESC LIMIT 4";
+									$stmt1 = $connection->prepare($sql1);
+									$stmt1->execute();
+										$result = $stmt1->get_result();
+										while($row = $result->fetch_assoc()) {
+														
+											?>	
 											<tr>
 												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>John Doe</h2>
+													<img width="28" height="28" class="rounded-circle" src="images/<?php echo $row['profile'];?>" alt=""> 
+													<h2><a href="patient_profile.php?ssn=<?php echo $row["ssn"];?>"><?php echo $row["fname"]," ", $row["lname"];?> <span><?php echo $row["address"];?></span></a></h2>
 												</td>
-												<td>Johndoe21@gmail.com</td>
-												<td>+1-202-555-0125</td>
-												<td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
+												<td><?php echo $row["email"];?></td>
+												<td><?php echo $row["phone"];?></td>
+												<td><button class="btn btn-primary btn-primary-<?php echo( $row["is_critical"]==1 ? 'four' : 'three' );?> float-right"><?php echo( $row["is_critical"]==1 ? 'Critical' : 'Not Critical' );?></button></td>
 											</tr>
-											<tr>
-												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>Richard</h2>
-												</td>
-												<td>Richard123@yahoo.com</td>
-												<td>202-555-0127</td>
-												<td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
-											</tr>
-											<tr>
-												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>Villiam</h2>
-												</td>
-												<td>Richard123@yahoo.com</td>
-												<td>+1-202-555-0106</td>
-												<td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-											</tr>
-											<tr>
-												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>Martin</h2>
-												</td>
-												<td>Richard123@yahoo.com</td>
-												<td>776-2323 89562015</td>
-												<td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
-											</tr>
+											<?php
+                                        }
+                                    ?>
+										
 										</tbody>
 									</table>
 								</div>

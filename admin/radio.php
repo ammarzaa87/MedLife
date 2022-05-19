@@ -104,7 +104,7 @@ if(empty($_SESSION['r_id'])){
      
 	  <div class="modal-body">
       <input class="form-control" type="file" name="my_file" id="my_file" required>
-        <small class="form-text text-muted">Max. file size: 50 MB. Allowed images: jpg, gif, png.</small>
+        <small class="form-text text-muted">Max. file size: 50 MB. Allowed Files: pdf, jpg, jpeg, png.</small>
     
 	  </div>
       

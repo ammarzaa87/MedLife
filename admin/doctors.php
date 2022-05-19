@@ -43,9 +43,8 @@ if(empty($_SESSION['a_id'])){
                         <span>Admin</span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
@@ -53,10 +52,9 @@ if(empty($_SESSION['a_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -144,7 +142,7 @@ if(empty($_SESSION['a_id'])){
                     <div class="col-md-4 col-sm-4  col-lg-3">
                         <div class="profile-widget">
                             <div class="doctor-img">
-                                <a class="avatar" href="profile.html"><img alt="" src="images/<?php echo $row['profile'];?>"></a>
+                                <a class="avatar" href="dr-profile.php?id=<?php echo $row["id"];?>"><img alt="" src="images/<?php echo $row['profile'];?>"></a>
                             </div>
                             <div class="dropdown profile-action">
                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

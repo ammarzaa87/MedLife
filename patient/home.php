@@ -502,7 +502,7 @@ if(empty($_SESSION['u_id'])){
                 </div>
                 <h3 class="heading"><a><?php echo $row['name'];?></a></h3>
                 <p><?php echo $row['description'];?></p>
-                <p class="btn btn-primary py-2 px-3">Read more</p>
+                
               </div>
             </div>
         	</div>

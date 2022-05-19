@@ -45,9 +45,9 @@ echo "<pre>";
 				$new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
 				$img_upload_path = '../images/'.$new_img_name;
 				move_uploaded_file($tmp_name, $img_upload_path);
-				$sql = "INSERT INTO `blog` (`description`, `category_id`, `name`,`image`) VALUES (?,?,?,?);"; #add the blog to the database
+				$sql = "INSERT INTO `blog` (`description`, `category_id`, `name`,`image`,`date`) VALUES (?,?,?,?,?);"; #add the blog to the database
 $stmt = $connection->prepare($sql);
-$stmt->bind_param("ssss",$desc,$cat,$name,$new_img_name);
+$stmt->bind_param("sssss",$desc,$cat,$name,$new_img_name,$date);
 $stmt->execute();
 header('location: ../blogs.php');
 				

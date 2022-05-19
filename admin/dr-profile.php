@@ -10,22 +10,18 @@ if(empty($_SESSION['a_id'])){
 <html lang="en">
 
 
-<!-- patients23:17-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <title>Patients</title>
+    <title>Doctor Profile</title>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
+    
 </head>
 
 <body>
@@ -72,11 +68,11 @@ if(empty($_SESSION['a_id'])){
                         <li>
                             <a href="admin.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-						<li>
+						<li class="active">
                             <a href="doctors.php"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
-                        <li class="active">
-                            <a href=""><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                        <li >
+                            <a href="patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
 						<li>
                             <a href="lab-tech.php"><i class="fa fa-medkit"></i> <span>Lab Technician</span></a>
@@ -118,91 +114,131 @@ if(empty($_SESSION['a_id'])){
                 </div>
             </div>
         </div>
-        <input type="hidden" id="pid">
+      
+
+
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <div class="col-sm-4 col-3">
-                        <h4 class="page-title">Patients</h4>
+                    <div class="col-sm-7 col-6">
+                        <h4 class="page-title">Doctor Profile</h4>
                     </div>
-                    <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="add-patient.php" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Patient</a>
+
+                    
+
+                    
+
+                </div>
+                <?php
+					$id=$_GET['id'];
+					$sql1 = "Select * from doctors where id=$id";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
+                <div class="card-box profile-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-view">
+                                <div class="profile-img-wrap">
+                                    <div class="profile-img">
+                                        <a href="#"><img class="avatar" src="images/<?php echo $row['profile'];?>" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="profile-basic">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="profile-info-left">
+                                                <h3 class="user-name m-t-0 mb-0"><?php echo $row["first_name"]," ", $row["last_name"];?></h3>
+                                                <small class="text-muted"><?php echo $row["speciality"];?></small>
+                                                <div class="staff-id">ID : <?php echo $row["dr_id"];?></div>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <ul class="personal-info">
+                                                <li>
+                                                    <span class="title">Phone:</span>
+                                                    <span class="text"><a href="#"><?php echo $row["phone"];?></a></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Email:</span>
+                                                    <span class="text"><a href="#"><?php echo $row["email"];?></a></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Birthday:</span>
+                                                    <span class="text"><?php echo date("d-m-Y", strtotime($row["birth"]));?></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Address:</span>
+                                                    <span class="text"><?php echo $row["address"];?></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Gender:</span>
+                                                    <span class="text"><?php echo $row["gender"];?></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
                     </div>
                 </div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="table-responsive">
-							<table class="table table-border table-striped custom-table datatable mb-0">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Age</th>
-										<th>Address</th>
-										<th>Phone</th>
-										<th>SSN</th>
-										<th class="text-right">Action</th>
-									</tr>
-								</thead>
-								<tbody>
-                               <?php
-                                    
-                                $sql1 = "SELECT * FROM `patients`";
-                                $stmt1 = $connection->prepare($sql1);
-                                $stmt1->execute();
-                                    $result = $stmt1->get_result();
-                                    while($row = $result->fetch_assoc()) {
-                                                    
-                                    $dateOfBirth = $row["birth"];;
-                                    $today = date("Y-m-d");
-                                    $diff = date_diff(date_create($dateOfBirth), date_create($today));
-                                    $age = $diff->format('%y');
-           
-                                        
-                                        ?>
-									<tr>
-										<td><img width="28" height="28" src="images/<?php echo $row['profile'];?>" class="rounded-circle m-r-5" alt=""><h2><a href="patient_profile.php?ssn=<?php echo $row["ssn"];?>"><?php echo $row["fname"]," ", $row["lname"];?></a></h2></td>
-										<td><?php echo $age;?></td>
-										<td><?php echo $row["address"];?></td>
-										<td><?php echo $row["phone"];?></td>
-										<td><?php echo $row["ssn"];?></td>
-										<td class="text-right">
-											<div class="dropdown dropdown-action">
-												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="edit-patient.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-													<a class="dropdown-item" data-role="delete" data-toggle="modal" data-id="<?php echo $row['id'];?>" data-target="#delete_patient" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-												</div>
-											</div>
-										</td>
-									</tr>
-                                    <?php
-                                        }
-                                    ?>
-								</tbody>
-							</table>
-						</div>
-					</div>
+
+
+
+
+				<div class="profile-tabs">
+					<ul class="nav nav-tabs nav-tabs-bottom">
+						<li class="nav-item"><a class="nav-link active" href="#about-cont" data-toggle="tab">About</a></li>
+						
+					</ul>
+
+					<div class="tab-content">
+						<div class="tab-pane show active" id="about-cont">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box">
+                            <h3 class="card-title">Biography</h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#/" class="name"><?php echo $row["biography"];?></a>
+                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                       
+                    </div>
                 </div>
-            </div>
-
-        </div>
-
-        <div id="delete_patient" class="modal fade delete-modal" role="dialog">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-body text-center">
-						<img src="assets/img/sent.png" alt="" width="50" height="46">
-						<h3>Are you sure want to delete this Patient?</h3>
-						<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-							<button type="submit" id="delete" class="btn btn-danger">Delete</button>
 						</div>
+						
 					</div>
 				</div>
-			</div>
-			
-		</div>
+            </div>
+
+
+
+       
+        </div>
+
+      
 		
     </div>
+   
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/popper.min.js"></script>
@@ -214,23 +250,8 @@ if(empty($_SESSION['a_id'])){
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="assets/js/app.js"></script>
-    <script type="text/javascript">
-$(document).ready(function(){
-	$(document).on('click','a[data-role=delete]',function(){
-		var id = $(this).data('id');
-		$('#pid').val(id);
-		
-	})
-    $(document).on('click','#delete',function(){
-	//alert($(this).data('id'));
-	var id = $('#pid').val();
-   location.replace("php/delete-patient.php?pid="+id)
-});
-
-});
-</script>
+ 
 </body>
 
 
-<!-- patients -->
 </html>

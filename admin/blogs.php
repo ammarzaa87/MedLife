@@ -44,9 +44,8 @@ if(empty($_SESSION['a_id'])){
                         <span>Admin</span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+					<a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/logout.php">Logout</a>
 					</div>
                 </li>
@@ -54,10 +53,9 @@ if(empty($_SESSION['a_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="php/logout.php">Logout</a>
+                <a class="dropdown-item" href="profile.html">My Profile</a>
+						<a class="dropdown-item" href="change-password.php">Change Password</a>
+						<a class="dropdown-item" href="php/logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -113,6 +111,7 @@ if(empty($_SESSION['a_id'])){
                 </div>
             </div>
         </div>
+        <input type="hidden" id="blid">
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -146,7 +145,7 @@ if(empty($_SESSION['a_id'])){
                                 
                                 <div class="blog-info clearfix">
                                     
-                                    <div class="post-right"><a href="php/delete-blog.php?blog_id=<?php echo $row['id'];?>"><i class="fa fa-trash-o m-r-5"> Delete </i></a> </div>
+                                    <div class="post-right"><a class="dropdown-item" data-role="delete" data-toggle="modal" data-id="<?php echo $row['id'];?>" data-target="#delete_blog" ><i class="fa fa-trash-o m-r-5"></i> Delete</a> </div>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +161,19 @@ if(empty($_SESSION['a_id'])){
 
 
 
-
+            <div id="delete_blog" class="modal fade delete-modal" role="dialog">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="assets/img/sent.png" alt="" width="50" height="46">
+						<h3>Are you sure want to delete this Blog?</h3>
+						<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+							<button type="submit" id="delete" class="btn btn-danger">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
         </div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
@@ -171,6 +182,21 @@ if(empty($_SESSION['a_id'])){
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.slimscroll.js"></script>
     <script src="assets/js/app.js"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
+	$(document).on('click','a[data-role=delete]',function(){
+		var id = $(this).data('id');
+		$('#blid').val(id);
+		
+	})
+    $(document).on('click','#delete',function(){
+	//alert($(this).data('id'));
+	var id = $('#blid').val();
+   location.replace("php/delete-blog.php?blog_id="+id)
+});
+
+});
+</script>
 </body>
 
 

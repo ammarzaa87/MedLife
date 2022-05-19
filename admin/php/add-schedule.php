@@ -51,7 +51,7 @@ while($i< $count){
     $i++;
     
 }
-header('location: ../schedule.php');
+header('location: ../schedule.php?id='.$doctor_id);
 
 
 	
