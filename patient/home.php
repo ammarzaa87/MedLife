@@ -62,6 +62,7 @@ if(empty($_SESSION['u_id'])){
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right justify-content-end">
 						    <p class="mb-0 register-link"><a href="php/logout.php" class="mr-3">Log Out</a></p>
 					    </div>
+						
 				    </div>
 			    </div>
 		    </div>
@@ -83,8 +84,8 @@ if(empty($_SESSION['u_id'])){
 	          <li class="nav-item"><a href="#doctor-section" class="nav-link"><span>Doctors</span></a></li>
 	          <li class="nav-item"><a href="#blog-section" class="nav-link"><span>Blog</span></a></li>
 	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+			  <li class="nav-item cta mr-md-2"><a href="file.php" class="nav-link">Medical File</a></li>
 			  <li class="nav-item cta mr-md-2"><a href="php/logout.php" class="nav-link">Log Out</a></li>
-			  
 	          
 	        </ul>
 	      </div>

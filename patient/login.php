@@ -59,8 +59,8 @@
           <div class="content">
             <h3>New here ?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+            YOUR HEALTH IS SO IMPORTANT, AND SHOULD BE A PRIORITY IN YOUR LIFE. A LITTLE CARE EACH DAY GOES A LONG WAY.
+             IF YOU NEGLECT YOUR HEALTH, YOU WILL HAVE NO CHOICE BUT TO ADDRESS IT, AT SOME POINT. HOPEFULLY, IT WON'T BE TOO LATE!
             </p>
           
 			<button class="btn transparent" id="sign-up-btn">

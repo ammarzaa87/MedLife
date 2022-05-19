@@ -35,12 +35,21 @@ if(empty($_SESSION['d_id'])){
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
 
-
+            <?php
+					$id=$_SESSION['d_id'];
+					$sql1 = "Select * from doctors where id=$id";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
 							<span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span><?php echo $row["first_name"]?></span>
                     </a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="profile.html">My Profile</a>
@@ -101,9 +110,7 @@ if(empty($_SESSION['d_id'])){
                     <div class="col-sm-4 col-3">
                         <h4 class="page-title">Schedule</h4>
                     </div>
-                    <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="add-schedule.php" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Schedule</a>
-                    </div>
+                   
                 </div>
 				<div class="row">
 					<div class="col-md-12">
@@ -116,39 +123,28 @@ if(empty($_SESSION['d_id'])){
 										<th>Available Days</th>
 										<th>Available Time</th>
 										
-										<th class="text-right">Action</th>
 									</tr>
 								</thead>
 								<tbody>
                                 <?php
-					$d_id=$_SESSION['d_id'];
-                    $sql1 = "SELECT * FROM `has_time` where doctor_id=$d_id";
+                                $dr_id= $_SESSION['d_id'];
+					$date= date('y-m-d');
+                    $sql1 = "SELECT H.id,D.first_name, D.last_name,D.speciality,H.date,H.timing_id,T.fromm,T.too FROM has_time AS H, 
+                    doctors AS D, timing AS T WHERE H.doctor_id=D.id AND H.timing_id=T.id AND D.id=$dr_id AND H.date>='$date' ORDER BY H.date,H.timing_id;";
                     $stmt1 = $connection->prepare($sql1);
                     $stmt1->execute();
                      $result = $stmt1->get_result();
                      while($row = $result->fetch_assoc()) {
-                        $sql2="Select * from doctors where id='".$row['doctor_id']."'"; 
-                        $stmt2 = $connection->prepare($sql2);
-                        $stmt2->execute();
-                        $result2 = $stmt2->get_result();
-                        $row1 = $result2->fetch_assoc();
+                       
                          
                          ?>
-									<tr>
-										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""><?php echo $row1['first_name']," ",$row1['last_name'];?></td>
-										<td><?php echo $row1['speciality'];?></td>
-										<td><?php echo $row['day'];?></td>
-										<td><?php echo $row["from"]," - ", $row["to"];?></td>
+										<tr>
+										<td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""><?php echo $row['first_name']," ",$row['last_name'];?></td>
+										<td><?php echo $row['speciality'];?></td>
+										<td><?php echo date("d-m-Y", strtotime($row["date"]));?></td>
+										<td><?php echo $row["fromm"]." - ".$row["too"];?></td>
 										
-										<td class="text-right">
-											<div class="dropdown dropdown-action">
-												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="edit-schedule.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-													<a class="dropdown-item" href="php/delete-schedule.php?sched_id=<?php echo $row['id'];?>" ><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-												</div>
-											</div>
-										</td>
+										
 									</tr>
                 <?php
 					}
