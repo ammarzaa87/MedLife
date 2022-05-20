@@ -105,7 +105,7 @@ else{
 }
 
 if($_POST["major"]==5){
-	$hash = hash('sha256', $password);
+$hash = hash('sha256', $password);
 $sql1="Select * from nurses where username=? and password=?"; #Check if the email already exists in the database
 $stmt1 = $connection->prepare($sql1);
 $stmt1->bind_param("ss",$username,$hash);

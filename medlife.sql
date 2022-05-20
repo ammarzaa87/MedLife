@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2022 at 12:28 AM
+-- Generation Time: May 20, 2022 at 09:15 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -36,6 +36,14 @@ CREATE TABLE `add_lab_res` (
   `file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `add_lab_res`
+--
+
+INSERT INTO `add_lab_res` (`id`, `patient_ssn`, `labtech_id`, `labtest_id`, `date`, `file`) VALUES
+(1, '000047359813', 1, 1, '2022-05-19', 'LABTEST-6286727f6011d0.62871515.pdf'),
+(2, '000047359813', 1, 5, '2022-05-26', 'LABTEST-62867388ce3e47.44879820.pdf');
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +58,13 @@ CREATE TABLE `add_radio_res` (
   `date` date NOT NULL,
   `file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `add_radio_res`
+--
+
+INSERT INTO `add_radio_res` (`id`, `patient_ssn`, `radiotech_id`, `radio_id`, `date`, `file`) VALUES
+(1, '000047359813', 1, 1, '2022-05-19', 'TEST-628672014a8497.13783174.pdf');
 
 -- --------------------------------------------------------
 
@@ -81,7 +96,7 @@ CREATE TABLE `appointments` (
   `patient_ssn` varchar(255) NOT NULL,
   `dr_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `time_id` varchar(255) NOT NULL,
+  `time_id` int(255) NOT NULL,
   `message` varchar(1000) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -106,8 +121,8 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `description`, `category_id`, `name`, `image`, `date`) VALUES
-(1, 'Artificial intelligence can now predict one of the leading causes of avoidable patient harm up to two days before it happens, as demonstrated by our latest research published in Nature. Working alongside experts from the US Department of Veterans Affairs (VA), we have developed technology that, in the future, could give doctors a 48-hour head start in treating acute kidney injury (AKI), a condition that is associated with over 100,000 people in the UK every year. These findings come alongside a peer-reviewed service evaluation of Streams, our mobile assistant for clinicians, which shows that patient care can be improved, and health care costs reduced, through the use of digital tools. Together, they form the foundation for a transformative advance in medicine, helping to move from reactive to preventative models of care.', 4, 'Using AI', 'IMG-625af64150ba02.29118013.jpg', '2022-04-01'),
-(2, 'Last week marked a major milestone in studying the human genome. Since the early 2000s, the Human Genome Project has published successive versions of their map, or \"sequence,\" of the human genome. While rightfully acclaimed, even the final version was incomplete - leaving about 8% of the genome undeciphered -and the job not yet done. Subsequent work by the Genome Reference Consortium and others filled in only a portion of the gaps. Persistent technological limitations stymied these attempts, but those barriers have now fallen in what has been described as a technical tour de force, yielding close to a complete sequence.', 2, 'Giant Leap for Human Genomics', 'IMG-625af6ed1914f3.70947754.jpg', '2022-04-07');
+(1, 'Why follow?Everyday Health covers health from A to Z—literally! This comprehensive site is a go-to resource for a wide range of symptoms and illnesses, as well as the latest news on developments in healthcare and breakthroughs in diseases. But the fun doesn’t stop there. Everyday Health also offers articles on mental and emotional health. Add in health tools like a symptom checker, meal planner and diabetes journal, and it’s easy to see that this site has something for everyone', 1, 'Everyday Health', 'IMG-6286205c1ba009.62960005.jpg', '2022-05-19'),
+(2, 'Why follow?Everyday Health covers health from A to Z—literally! This comprehensive site is a go-to resource for a wide range of symptoms and illnesses, as well as the latest news on developments in healthcare and breakthroughs in diseases. But the fun doesn’t stop there. Everyday Health also offers articles on mental and emotional health. Add in health tools like a symptom checker, meal planner and diabetes journal, and it’s easy to see that this site has something for everyone', 1, 'Your Blood', 'IMG-6287a5ba4f6167.68012567.jpg', '2022-05-20');
 
 -- --------------------------------------------------------
 
@@ -177,6 +192,15 @@ CREATE TABLE `dolab` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `dolab`
+--
+
+INSERT INTO `dolab` (`id`, `labtest_id`, `patient_ssn`, `status`, `date`) VALUES
+(1, 1, '000047359813', 0, '2022-05-19'),
+(2, 5, '000047359813', 0, '2022-05-27'),
+(3, 9, '000047359813', 1, '2022-05-13');
+
 -- --------------------------------------------------------
 
 --
@@ -191,6 +215,13 @@ CREATE TABLE `doradio` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `doradio`
+--
+
+INSERT INTO `doradio` (`id`, `radio_id`, `patient_ssn`, `status`, `date`) VALUES
+(1, 1, '000047359813', 0, '2022-05-19');
+
 -- --------------------------------------------------------
 
 --
@@ -204,6 +235,25 @@ CREATE TABLE `has_time` (
   `date` date NOT NULL,
   `availability` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `has_time`
+--
+
+INSERT INTO `has_time` (`id`, `doctor_id`, `timing_id`, `date`, `availability`) VALUES
+(48, 1, 4, '2022-05-20', 0),
+(49, 1, 5, '2022-05-20', 1),
+(50, 1, 6, '2022-05-20', 1),
+(51, 1, 7, '2022-05-20', 1),
+(52, 1, 8, '2022-05-20', 1),
+(53, 1, 9, '2022-05-20', 1),
+(54, 1, 10, '2022-05-20', 1),
+(55, 1, 11, '2022-05-20', 1),
+(56, 1, 12, '2022-05-20', 1),
+(57, 1, 13, '2022-05-20', 1),
+(58, 1, 14, '2022-05-20', 1),
+(59, 1, 15, '2022-05-20', 1),
+(60, 1, 16, '2022-05-20', 1);
 
 -- --------------------------------------------------------
 
@@ -308,7 +358,11 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`id`, `ssn`, `fname`, `lname`, `profile`, `email`, `phone`, `password`, `gender`, `birth`, `address`, `is_critical`) VALUES
-(1, '000047359813', 'Ammar ', 'Zaarour', 'IMG-62631a695998e9.42777059.jpg', 'ammar.rushdi.zaarour@gmail.com', '71696574', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '2000-04-12', 'Bekaa, Bekaa, Lebanon', 0);
+(1, '000047359813', 'Ammar ', 'Zaarour', 'IMG-62631a695998e9.42777059.jpg', 'ammar.rushdi.zaarour@gmail.com', '71696574', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '2000-04-12', 'El-Marj, Bekaa, Lebanon', 0),
+(2, '00004737832', 'Ali', 'Haidar', 'IMG-62867e09deb714.30441724.jpg', 'ali.haidar@gmail.com', '71 232323', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '1990-12-05', 'Bar-Elias, Bekaa, Lebanon', 1),
+(3, '000047359890', 'Rola', 'Shehab', 'user.jpg', 'rola.she@gmail.com', '71 676767', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Female', '1989-12-07', 'Hamra, Beirut, Lebanon', 0),
+(4, '000047359833', 'Rana', 'Haj', 'IMG-62867f47d94009.52264382.jpg', 'rana.haj@gmail.com', '03 555555', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Female', '1995-12-05', 'Nabatieh, South Lebanon, Lebanon', 0),
+(5, '000047359844', 'Khaled', 'Hali', 'IMG-6286804834d4b7.67672678.jpg', 'khaled.hali@gmail.com', '81 765645', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '1980-09-18', 'Khiam, South Lebanon, Lebanon', 1);
 
 -- --------------------------------------------------------
 
@@ -519,13 +573,13 @@ ALTER TABLE `timing`
 -- AUTO_INCREMENT for table `add_lab_res`
 --
 ALTER TABLE `add_lab_res`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `add_radio_res`
 --
 ALTER TABLE `add_radio_res`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -561,19 +615,19 @@ ALTER TABLE `doctors`
 -- AUTO_INCREMENT for table `dolab`
 --
 ALTER TABLE `dolab`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `doradio`
 --
 ALTER TABLE `doradio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `has_time`
 --
 ALTER TABLE `has_time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `labtech`
@@ -597,7 +651,7 @@ ALTER TABLE `nurses`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `radios`

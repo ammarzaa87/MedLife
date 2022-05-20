@@ -95,17 +95,54 @@ if(empty($_SESSION['r_id'])){
                 </div>
             </div>
         </div>
+
+
+
+
+
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
+                    <?php
+					
+                                    if (!empty($_SESSION["a-pass-success"])){
+                                    ?>
+                                    <div class="alert alert-success" role="alert">
+                                    <?php
+                                    $x = $_SESSION["a-pass-success"];
+                                    echo $x;
+                                    $_SESSION["a-pass-success"] = "";
+                                    
+                                
+                                    ?>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>
                         <h4 class="page-title">Change Password</h4>
-                        <form>
+                        <?php
+					
+                    if (!empty($_SESSION["a-pass"])){
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php
+                    $x = $_SESSION["a-pass"];
+                    echo $x;
+                    $_SESSION["a-pass"] = "";
+                    
+                
+                    ?>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                        <form action="php/radio-change-pass.php" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Old password</label>
-                                        <input type="password" class="form-control">
+                                        <input  name="old" type="password" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -113,19 +150,19 @@ if(empty($_SESSION['r_id'])){
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>New password</label>
-                                        <input type="password" class="form-control">
+                                        <input id="password" name="new" type="password" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Confirm password</label>
-                                        <input type="password" class="form-control">
+                                        <input id="confirm_password" name="confirm" type="password" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 text-center m-t-20">
-                                    <button type="button" class="btn btn-primary submit-btn">Update Password</button>
+                                    <button class="btn btn-primary submit-btn">Update Password</button>
                                 </div>
                             </div>
                         </form>
@@ -136,6 +173,7 @@ if(empty($_SESSION['r_id'])){
 
             
         </div>
+
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -146,6 +184,21 @@ if(empty($_SESSION['r_id'])){
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <script>
+                var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+            function validatePassword(){
+            if(password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+            }
+
+            password.onchange = validatePassword;
+            confirm_password.onkeyup = validatePassword;
+</script>
 </body>
 
 

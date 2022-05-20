@@ -1,7 +1,7 @@
 <?php
 include "connection.php";
 session_start();
-if(empty($_SESSION['a_id'])){
+if(empty($_SESSION['d_id'])){
     header("Location: ../index.php");
     die();
 }
@@ -26,8 +26,8 @@ if(isset($_POST["confirm"]) && $_POST["confirm"] != "") {
     die ("Enter confirm new password");
 }
 $hash = hash('sha256', $old);
-$id = $_SESSION['a_id'];
-$sql1="Select * from admins where id=? and password=?"; #Check if old pass already exists in the database
+$id = $_SESSION['d_id'];
+$sql1="Select * from doctors where id=? and password=?"; #Check if old pass already exists in the database
 $stmt1 = $connection->prepare($sql1);
 $stmt1->bind_param("ss",$id,$hash);
 $stmt1->execute();
@@ -37,30 +37,30 @@ $realold =$row["password"];
 $newhash = hash('sha256', $new);
 if(empty($row)){
     $_SESSION["a-pass"] = "Your old password is incorrect";
-    header('location: ../change-password.php');
+    header('location: ../dr-change-password.php');
 }
 else{
     
 	if ($_POST["new"] === $_POST["confirm"]) {
         if($realold === $newhash){
             $_SESSION["a-pass"] = "Old Passsword Can't be the new one";
-            header('location: ../change-password.php');
+            header('location: ../dr-change-password.php');
         }
         else{
             
             
-            $sql = "UPDATE admins SET password = '$newhash' where id=$id";
+            $sql = "UPDATE doctors SET password = '$newhash' where id=$id";
             $stmt = $connection->prepare($sql);
             $stmt->execute();
             $_SESSION["a-pass-success"] = "Password Changed Successfully";
-            header('location: ../change-password.php');
+            header('location: ../dr-change-password.php');
         }
        
      }
      else {
        
         $_SESSION["a-pass"] = "Passwords didn't match";
-        header('location: ../change-password.php');
+        header('location: ../dr-change-password.php');
      }
 	
 }
