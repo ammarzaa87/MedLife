@@ -54,9 +54,8 @@ if(empty($_SESSION['d_id'])){
 						<span><?php echo $row["first_name"]?></span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+						
+						<a class="dropdown-item" href="dr-change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/dr-logout.php">Logout</a>
 					</div>
                 </li>
@@ -64,9 +63,8 @@ if(empty($_SESSION['d_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
+                   
+                    <a class="dropdown-item" href="dr-change-password.php">Change Password</a>
                     <a class="dropdown-item" href="php/dr-logout.php">Logout</a>
                 </div>
             </div>
@@ -117,30 +115,42 @@ if(empty($_SESSION['d_id'])){
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <div class="dash-widget">
-							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-							<div class="dash-widget-info text-right">
-								<h3>98</h3>
-								<span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
-							</div>
-                        </div>
-                    </div>
+				<?php
+					$dr_id= $_SESSION['d_id'];
+					$sql1 = "Select (select count(*) from patients) as count1, (select count(*) from appointments where dr_id=$dr_id) as count2,
+					(select count(*) from appointments where dr_id=$dr_id AND status=0) as count3,
+					 (select count(*) from appointments where dr_id=$dr_id AND status=1) as count4;";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <div class="dash-widget">
                             <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
                             <div class="dash-widget-info text-right">
-                                <h3>1072</h3>
+                                <h3><?php echo $row["count1"];?></h3>
                                 <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
+                        </div>
+                    </div>
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget">
+							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+							<div class="dash-widget-info text-right">
+								<h3><?php echo $row["count2"];?></h3>
+								<span class="widget-title1">Appointments <i class="fa fa-check" aria-hidden="true"></i></span>
+							</div>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <div class="dash-widget">
                             <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
                             <div class="dash-widget-info text-right">
-                                <h3>72</h3>
-                                <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
+                                <h3><?php echo $row["count3"];?></h3>
+                                <span class="widget-title3">Done <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>
@@ -148,7 +158,7 @@ if(empty($_SESSION['d_id'])){
                         <div class="dash-widget">
                             <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
                             <div class="dash-widget-info text-right">
-                                <h3>618</h3>
+                                <h3><?php echo $row["count4"];?></h3>
                                 <span class="widget-title4">Pending <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
@@ -159,7 +169,7 @@ if(empty($_SESSION['d_id'])){
 					<div class="col-12 col-md-12 col-lg-12 col-xl-12">
 						<div class="card">
 							<div class="card-header">
-								<h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="appointments.html" class="btn btn-primary float-right">View all</a>
+								<h4 class="card-title d-inline-block">Today's Appointments</h4> <a href="dr-appointments.php" class="btn btn-primary float-right">View all</a>
 							</div>
 							<div class="card-body p-0">
 								<div class="table-responsive">
@@ -173,91 +183,44 @@ if(empty($_SESSION['d_id'])){
 											</tr>
 										</thead>
 										<tbody>
+										
+										
+										
+										<?php
+                            $d_id = $_SESSION['d_id'];
+							$date= date('y-m-d');
+                            $sql1 = "SELECT A.id,A.time_id, D.first_name,D.last_name,D.speciality,P.ssn,P.fname,P.address,P.lname,P.birth,T.fromm,T.too,A.date, A.status
+                            FROM appointments AS A, patients AS P, timing AS T , doctors AS D WHERE A.patient_ssn=P.ssn
+                             AND A.time_id=T.id AND A.dr_id=D.id AND A.dr_id=$d_id AND A.date='$date' AND A.status=1 ORDER BY A.time_id limit 4;";
+                            $stmt1 = $connection->prepare($sql1);
+                            $stmt1->execute();
+                            $result = $stmt1->get_result();
+                            while($row = $result->fetch_assoc()) {
+                               
+                                
+                         
+                         ?>
 											<tr>
 												<td style="min-width: 200px;">
 													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
+													<h2><a href="profile.html"><?php echo $row["fname"]," ", $row["lname"];?> <span><?php echo $row["address"]?></span></a></h2>
 												</td>                 
 												<td>
 													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
+													<p>Dr. <?php echo $row["first_name"]," ", $row["last_name"];?></p>
 												</td>
 												<td>
 													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
+													<p><?php echo $row["fromm"]," ", $row["too"];?></p>
 												</td>
 												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
+													<a href="dr-medfile.php?ssn=<?php echo $row["ssn"]?>" class="btn btn-outline-primary take-btn">Take up</a>
 												</td>
 											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
-											<tr>
-												<td style="min-width: 200px;">
-													<a class="avatar" href="profile.html">B</a>
-													<h2><a href="profile.html">Bernardo Galaviz <span>New York, USA</span></a></h2>
-												</td>                 
-												<td>
-													<h5 class="time-title p-0">Appointment With</h5>
-													<p>Dr. Cristina Groves</p>
-												</td>
-												<td>
-													<h5 class="time-title p-0">Timing</h5>
-													<p>7.00 PM</p>
-												</td>
-												<td class="text-right">
-													<a href="appointments.html" class="btn btn-outline-primary take-btn">Take up</a>
-												</td>
-											</tr>
+
+											<?php
+                                }
+                            ?>
 										</tbody>
 									</table>
 								</div>
@@ -273,48 +236,37 @@ if(empty($_SESSION['d_id'])){
 					<div class="col-12 col-md-12 col-lg-12 col-xl-12">
 						<div class="card">
 							<div class="card-header">
-								<h4 class="card-title d-inline-block">New Patients </h4> <a href="patients.html" class="btn btn-primary float-right">View all</a>
+								<h4 class="card-title d-inline-block">New Patients </h4> <a href="dr-patients.php" class="btn btn-primary float-right">View all</a>
 							</div>
 							<div class="card-block">
 								<div class="table-responsive">
 									<table class="table mb-0 new-patient-table">
 										<tbody>
+											
+										<?php
+                                    
+									$sql1 = "SELECT * FROM `patients` ORDER BY id DESC LIMIT 4";
+									$stmt1 = $connection->prepare($sql1);
+									$stmt1->execute();
+										$result = $stmt1->get_result();
+										while($row = $result->fetch_assoc()) {
+														
+											?>	
+											
 											<tr>
 												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>John Doe</h2>
+													<img width="28" height="28" class="rounded-circle" src="images/<?php echo $row['profile'];?>" alt=""> 
+													<h2><a href="dr-medfile.php?ssn=<?php echo $row["ssn"];?>"><?php echo $row["fname"]," ", $row["lname"];?> <span><?php echo $row["address"];?></span></a></h2>
 												</td>
-												<td>Johndoe21@gmail.com</td>
-												<td>+1-202-555-0125</td>
-												<td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
+												<td><?php echo $row["email"];?></td>
+												<td><?php echo $row["phone"];?></td>
+												<td><button class="btn btn-primary btn-primary-<?php echo( $row["is_critical"]==1 ? 'four' : 'three' );?> float-right"><?php echo( $row["is_critical"]==1 ? 'Critical' : 'Not Critical' );?></button></td>
 											</tr>
-											<tr>
-												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>Richard</h2>
-												</td>
-												<td>Richard123@yahoo.com</td>
-												<td>202-555-0127</td>
-												<td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
-											</tr>
-											<tr>
-												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>Villiam</h2>
-												</td>
-												<td>Richard123@yahoo.com</td>
-												<td>+1-202-555-0106</td>
-												<td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-											</tr>
-											<tr>
-												<td>
-													<img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt=""> 
-													<h2>Martin</h2>
-												</td>
-												<td>Richard123@yahoo.com</td>
-												<td>776-2323 89562015</td>
-												<td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
-											</tr>
+											<?php
+                                        }
+                                    ?>
+
+
 										</tbody>
 									</table>
 								</div>

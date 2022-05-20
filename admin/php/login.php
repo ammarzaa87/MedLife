@@ -77,7 +77,7 @@ if(empty($row)){
 else{
 	session_start();
 	$_SESSION["l_id"] = $row["id"];
-	header('location: ../test.php');
+	header('location: ../lab.php');
 	
 }
 }

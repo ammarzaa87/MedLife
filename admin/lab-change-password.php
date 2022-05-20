@@ -1,13 +1,14 @@
 <?php
 include "php/connection.php";
 session_start();
-if(empty($_SESSION['d_id'])){
+if(empty($_SESSION['l_id'])){
     header("Location: index.php");
     die();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 
 
 <head>
@@ -20,14 +21,14 @@ if(empty($_SESSION['d_id'])){
     <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
+  
 </head>
 
 <body>
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="dr-pannel.php" class="logo">
+				<a href="lab.php" class="logo">
 					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>MedLife</span>
 				</a>
 			</div>
@@ -35,8 +36,8 @@ if(empty($_SESSION['d_id'])){
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
             <?php
-					$id=$_SESSION['d_id'];
-					$sql1 = "Select * from doctors where id=$id";
+					$id=$_SESSION['l_id'];
+					$sql1 = "Select * from labtech where id=$id";
 					$stmt1 = $connection->prepare($sql1);
 					$stmt1->execute();
 					 $result = $stmt1->get_result();
@@ -49,19 +50,19 @@ if(empty($_SESSION['d_id'])){
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
 							<span class="status online"></span></span>
-                        <span><?php echo $row["first_name"]?></span>
+                        <span><?php echo $row["fname"]?></span>
                     </a>
 					<div class="dropdown-menu">
-                    <a class="dropdown-item" href="dr-change-password.php">Change Password</a>
-                    <a class="dropdown-item" href="php/dr-logout.php">Logout</a>
+                    <a class="dropdown-item" href="lab-change-password.php">Change Password</a>
+						<a class="dropdown-item" href="php/l-logout.php">Logout</a>
 					</div>
                 </li>
             </ul>
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="dr-change-password.php">Change Password</a>
-                    <a class="dropdown-item" href="php/dr-logout.php">Logout</a>
+                <a class="dropdown-item" href="lab-change-password.php">Change Password</a>
+						<a class="dropdown-item" href="php/l-logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -70,26 +71,16 @@ if(empty($_SESSION['d_id'])){
                 <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
                         <li class="menu-title">Main</li>
-                        <li>
-                            <a href="dr-pannel.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
-						
-                        <li>
-                            <a href="dr-patients.php"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                        </li>
-						
-					
-						
-                        <li>
-                            <a href="dr-appointments.php"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                        </li>
-                        <li>
-                            <a href="dr-schedule.php"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
-                        </li>
                        
-					
-                     
 						
+                        
+						
+					
+						
+                        <li>
+                            <a href="lab.php"><i class="fa fa-calendar"></i> <span>Lab Tests</span></a>
+                        </li>
+                        
                         <li class="active">
                             <a href=""><i class="fa fa-lock"></i> <span>Change Password</span></a>
                         </li>

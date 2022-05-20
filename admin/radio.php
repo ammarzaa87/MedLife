@@ -37,17 +37,24 @@ if(empty($_SESSION['r_id'])){
 
 
 
-               
+            <?php
+					$id=$_SESSION['r_id'];
+					$sql1 = "Select * from radiotech where id=$id";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
 							<span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span><?php echo $row["fname"]?></span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="radio-change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/r-logout.php">Logout</a>
 					</div>
                 </li>
@@ -55,9 +62,7 @@ if(empty($_SESSION['r_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
+                <a class="dropdown-item" href="radio-change-password.php">Change Password</a>
                     <a class="dropdown-item" href="php/r-logout.php">Logout</a>
                 </div>
             </div>

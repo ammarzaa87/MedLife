@@ -34,7 +34,16 @@ if(empty($_SESSION['l_id'])){
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
                
-
+            <?php
+					$id=$_SESSION['l_id'];
+					$sql1 = "Select * from labtech where id=$id";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 $row = $result->fetch_assoc();
+						 
+						 
+						 ?>
 
 
                
@@ -42,12 +51,11 @@ if(empty($_SESSION['l_id'])){
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
 							<span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span><?php echo $row["fname"]?></span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+						
+						<a class="dropdown-item" href="lab-change-password.php">Change Password</a>
 						<a class="dropdown-item" href="php/l-logout.php">Logout</a>
 					</div>
                 </li>
@@ -55,9 +63,8 @@ if(empty($_SESSION['l_id'])){
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
+                  
+                    <a class="dropdown-item" href="lab-change-password.php">Change Password</a>
                     <a class="dropdown-item" href="php/l-logout.php">Logout</a>
                 </div>
             </div>
@@ -78,7 +85,7 @@ if(empty($_SESSION['l_id'])){
                         </li>
                         
                         <li>
-                            <a href="dr-change-password.php"><i class="fa fa-lock"></i> <span>Change Password</span></a>
+                            <a href="lab-change-password.php"><i class="fa fa-lock"></i> <span>Change Password</span></a>
                         </li>
                        
                      
@@ -100,7 +107,7 @@ if(empty($_SESSION['l_id'])){
      
 	  <div class="modal-body">
       <input class="form-control" type="file" name="my_file" id="my_file" required>
-        <small class="form-text text-muted">Max. file size: 50 MB. Allowed images: jpg, gif, png.</small>
+        <small class="form-text text-muted">Max. file size: 50 MB. Allowed Files: pdf, jpg, jpeg, png.</small>
     
 	  </div>
       
