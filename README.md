@@ -91,17 +91,17 @@ After login in and selecting doctor from the user types, the doctor will be in c
 
 3. Lab and Radio Technician Sides:
 After selecting a lab or radio technician from the user list, MedLife will display a list of patients for whom the doctor has requested lab or radio tests, and they will be responsible for adding the test file to the patient's medical life.
+
 ![image](https://user-images.githubusercontent.com/76926016/175817258-40eaa887-7204-409e-abf0-5b3b122109e9.png)
 
 ![image](https://user-images.githubusercontent.com/76926016/175817270-c3aebe95-a443-4be8-a2ea-76690b0ea219.png)
 
 
-And both lab and radio technicians have the option to change the password (Figure 6-35).
+And both lab and radio technicians have the option to change the password.
 
 4. Nurse Side:
 At the nurse's side, MedLife displays critical patients in such a way that medical information (blood pressure, diabetes, heart beat) may be added.
  
-
 
 ![image](https://user-images.githubusercontent.com/76926016/175817295-499893a1-cdc4-4c7e-b621-6b14f1743541.png)
 
