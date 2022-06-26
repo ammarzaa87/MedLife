@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2022 at 09:15 PM
+-- Generation Time: Jun 26, 2022 at 03:23 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -42,7 +42,8 @@ CREATE TABLE `add_lab_res` (
 
 INSERT INTO `add_lab_res` (`id`, `patient_ssn`, `labtech_id`, `labtest_id`, `date`, `file`) VALUES
 (1, '000047359813', 1, 1, '2022-05-19', 'LABTEST-6286727f6011d0.62871515.pdf'),
-(2, '000047359813', 1, 5, '2022-05-26', 'LABTEST-62867388ce3e47.44879820.pdf');
+(2, '000047359813', 1, 5, '2022-05-26', 'LABTEST-62867388ce3e47.44879820.pdf'),
+(8, '000047359813', 1, 10, '2022-06-16', 'LABTEST-62aa5b8c743020.51975484.pdf');
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,8 @@ CREATE TABLE `add_radio_res` (
 --
 
 INSERT INTO `add_radio_res` (`id`, `patient_ssn`, `radiotech_id`, `radio_id`, `date`, `file`) VALUES
-(1, '000047359813', 1, 1, '2022-05-19', 'TEST-628672014a8497.13783174.pdf');
+(1, '000047359813', 1, 1, '2022-05-19', 'TEST-628672014a8497.13783174.pdf'),
+(7, '000047359813', 1, 11, '2022-06-16', 'TEST-62aa5bdb62a988.30143461.pdf');
 
 -- --------------------------------------------------------
 
@@ -83,7 +85,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `password`) VALUES
-(1, 'med_admin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3');
+(1, 'med_admin', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4');
 
 -- --------------------------------------------------------
 
@@ -100,6 +102,17 @@ CREATE TABLE `appointments` (
   `message` varchar(1000) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `patient_ssn`, `dr_id`, `date`, `time_id`, `message`, `status`) VALUES
+(1, '000047359813', 1, '2022-05-22', 1, '', 0),
+(2, '000047359813', 1, '2022-05-22', 5, '', 0),
+(3, '000047359813', 1, '2022-06-02', 3, '', 0),
+(11, '000047359813', 1, '2022-06-30', 1, 'any', 0),
+(12, '000047359813', 1, '2022-06-30', 2, 'any', 1);
 
 -- --------------------------------------------------------
 
@@ -172,11 +185,10 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `first_name`, `last_name`, `dr_id`, `gender`, `phone`, `email`, `password`, `birth`, `profile`, `speciality`, `address`, `biography`) VALUES
-(1, 'Aimee', 'Nasser-Karam', '7832675362', 'Female', '03 920717', 'amnasser@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1983-03-09', 'IMG-623c963d73c1d7.18778331.jpg', 'Cardiothoracic Surgery', 'Hamra, Beirut, Lebanon', 'Cognitive Therapy Specialty at the Center for Cognitive Therapy (Now: Beck’s Institute), Penn University, Philadelphia, U.S.A\nPostdoc: Postgraduate Diploma in Advanced Cognitive Therapy Studies.  Oxford University, U.K\nDBT (Dialectical Behavioral Therapy), OCTC. Oxford, England'),
-(2, 'Antoine', 'Challita', '2185745945', 'Male', '01 441 814', 'akchallita@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2022-03-16', 'IMG-623c97b3de4d01.87169897.jpg', 'Family Medicine', 'Rawshi, Beirut, Lebanon', 'Medical School\n\nSaint Joseph University - Beirut - Lebanon\n\nResidency\n\nOccupational Medicine: Saint Joseph University - Beirut - Lebanon Family Medicine: American University of Beirut - Lebanon\n\nAcademic Rank\n\nInstructor of Clinical Family Medicine - Faculty of Medicine, University of Balamand'),
-(3, 'Antoine', 'Jaklis', '4562849764', 'Male', '01 441 889', 'amjaklis@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1980-06-11', 'IMG-623c9902ea8cd3.93284079.jpg', 'E.N.T.', 'Bar-Elias, Bekaa, Lebanon', 'Lebanese Order of Physicians\r\nLebanese Society of O.R.L - Head and Neck Surgery\r\nLebanese Society of Endoscopic Surgery\r\nFrench Society of O.R.L - Head and Neck Surgery\r\nMediterranean Society of Facial Plastic Surgery'),
-(4, 'Assaad', 'Maalouf', '1277895664', 'Male', '01 441 824', 'asnmaalouf@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1980-11-11', 'doctor.png', 'Urology', 'Saida, South Lebanon, Lebanon', 'Medical School\r\n\r\nAmerican University of Beirut - Lebanon\r\n\r\nResidency\r\n\r\nInternal Medicine: Good Samaritan Hospital - U.S.A. and University of Utah - USA\r\nCardiology: University of Utah- USA\r\n\r\nAcademic Rank\r\n\r\nAssistant Professor of Clinical Medicine - Faculty of Medicine, University of Balamand'),
-(5, 'Aida', 'Yazigi ', '7693576589', 'Female', '01 441 733', 'avyazigi@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1971-02-24', 'f-doctor.png', 'Gastroenterology', 'Baabda, Mount Lebanon, Lebanon', 'Medical School\r\n\r\nAmerican University of Beirut - Lebanon\r\n\r\nResidency\r\n\r\nPediatrics: American University of Beirut - Lebanon\r\n\r\nAcademic Rank\r\n\r\nProfessor of Clinical Pediatrics- Faculty of Medicine - University of Balamand');
+(1, 'Aime', 'Nasser-Karam', '11111111', 'Female', '71696574', 'amnasser@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1983-03-09', 'IMG-62a8d5cbe44b17.75727207.jpg', 'Cardiothoracic Surgery', 'El Marj, Bekaa, Lebanon', 'Cognitive Therapy Specialty at the Center for Cognitive Therapy (Now: Beck’s Institute), Penn University, Philadelphia, U.S.A\r\nPostdoc: Postgraduate Diploma in Advanced Cognitive Therapy Studies.  Oxford University, U.K\r\nDBT (Dialectical Behavioral Therapy), OCTC. Oxford, England'),
+(2, 'Antoine', 'Challita', '2185745945', 'Male', '01 441 814', 'akchallita@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1950-02-16', 'IMG-623c97b3de4d01.87169897.jpg', 'Family Medicine', 'Rawshi, Beirut, Lebanon', 'Medical School\r\n\r\nSaint Joseph University - Beirut - Lebanon\r\n\r\nResidency\r\n\r\nOccupational Medicine: Saint Joseph University - Beirut - Lebanon Family Medicine: American University of Beirut - Lebanon\r\n\r\nAcademic Rank\r\n\r\nInstructor of Clinical Family Medicine - Faculty of Medicine, University of Balamand'),
+(3, 'Antoine', 'Jaklis', '4562849764', 'Male', '01 441 889', 'amjaklis@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1980-06-11', 'IMG-623c9902ea8cd3.93284079.jpg', 'E.N.T.', 'El Marj, Bekaa, Lebanon', 'Lebanese Order of Physicians\r\nLebanese Society of O.R.L - Head and Neck Surgery\r\nLebanese Society of Endoscopic Surgery\r\nFrench Society of O.R.L - Head and Neck Surgery\r\nMediterranean Society of Facial Plastic Surgery'),
+(4, 'Assaad', 'Maalouf', '1277895664', 'Male', '01 441 824', 'asnmaalouf@medlife.org', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1980-11-11', 'doctor.png', 'Urology', 'Saida, South Lebanon, Lebanon', 'Medical School\r\n\r\nAmerican University of Beirut - Lebanon\r\n\r\nResidency\r\n\r\nInternal Medicine: Good Samaritan Hospital - U.S.A. and University of Utah - USA\r\nCardiology: University of Utah- USA\r\n\r\nAcademic Rank\r\n\r\nAssistant Professor of Clinical Medicine - Faculty of Medicine, University of Balamand');
 
 -- --------------------------------------------------------
 
@@ -199,7 +211,8 @@ CREATE TABLE `dolab` (
 INSERT INTO `dolab` (`id`, `labtest_id`, `patient_ssn`, `status`, `date`) VALUES
 (1, 1, '000047359813', 0, '2022-05-19'),
 (2, 5, '000047359813', 0, '2022-05-27'),
-(3, 9, '000047359813', 1, '2022-05-13');
+(9, 5, '000047359813', 1, '2022-06-30'),
+(10, 10, '000047359813', 0, '2022-07-01');
 
 -- --------------------------------------------------------
 
@@ -220,7 +233,9 @@ CREATE TABLE `doradio` (
 --
 
 INSERT INTO `doradio` (`id`, `radio_id`, `patient_ssn`, `status`, `date`) VALUES
-(1, 1, '000047359813', 0, '2022-05-19');
+(1, 1, '000047359813', 0, '2022-05-19'),
+(7, 5, '000047359813', 1, '2022-06-30'),
+(8, 11, '000047359813', 0, '2022-07-01');
 
 -- --------------------------------------------------------
 
@@ -241,19 +256,22 @@ CREATE TABLE `has_time` (
 --
 
 INSERT INTO `has_time` (`id`, `doctor_id`, `timing_id`, `date`, `availability`) VALUES
-(48, 1, 4, '2022-05-20', 0),
-(49, 1, 5, '2022-05-20', 1),
-(50, 1, 6, '2022-05-20', 1),
-(51, 1, 7, '2022-05-20', 1),
-(52, 1, 8, '2022-05-20', 1),
-(53, 1, 9, '2022-05-20', 1),
-(54, 1, 10, '2022-05-20', 1),
-(55, 1, 11, '2022-05-20', 1),
-(56, 1, 12, '2022-05-20', 1),
-(57, 1, 13, '2022-05-20', 1),
-(58, 1, 14, '2022-05-20', 1),
-(59, 1, 15, '2022-05-20', 1),
-(60, 1, 16, '2022-05-20', 1);
+(113, 1, 1, '2022-06-30', 0),
+(114, 1, 2, '2022-06-30', 0),
+(115, 1, 3, '2022-06-30', 1),
+(116, 1, 4, '2022-06-30', 1),
+(117, 1, 5, '2022-06-30', 1),
+(118, 1, 6, '2022-06-30', 1),
+(119, 1, 7, '2022-06-30', 1),
+(120, 1, 8, '2022-06-30', 1),
+(121, 1, 9, '2022-06-30', 1),
+(122, 1, 10, '2022-06-30', 1),
+(123, 1, 11, '2022-06-30', 1),
+(124, 1, 12, '2022-06-30', 1),
+(125, 1, 13, '2022-06-30', 1),
+(126, 1, 14, '2022-06-30', 1),
+(127, 1, 15, '2022-06-30', 1),
+(128, 1, 16, '2022-06-30', 1);
 
 -- --------------------------------------------------------
 
@@ -277,7 +295,7 @@ CREATE TABLE `labtech` (
 --
 
 INSERT INTO `labtech` (`id`, `fname`, `phone`, `lname`, `birth`, `username`, `password`, `gender`) VALUES
-(1, 'Emad ', '78947223', 'Zaarour', '2002-02-20', 'emadzaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male'),
+(1, 'emad', '78 000 000', 'Zaarour', '2002-02-20', 'emadzaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male'),
 (2, 'Rayan', '71600600', 'Zaarour', '2004-03-10', 'rayanzaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Female');
 
 -- --------------------------------------------------------
@@ -310,6 +328,32 @@ INSERT INTO `labtests` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `monitoring`
+--
+
+CREATE TABLE `monitoring` (
+  `id` int(11) NOT NULL,
+  `patient_ssn` varchar(255) NOT NULL,
+  `nurse_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `pressure` varchar(255) NOT NULL,
+  `diabetes` varchar(255) NOT NULL,
+  `heartbeat` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `monitoring`
+--
+
+INSERT INTO `monitoring` (`id`, `patient_ssn`, `nurse_id`, `date`, `time`, `pressure`, `diabetes`, `heartbeat`) VALUES
+(1, '00004737832', 1, '2022-05-22', '02:21 am', '92', '80', 90),
+(2, '000047359844', 1, '2022-05-22', '10:22 am', '90', '90', 90),
+(6, '000047359813', 1, '2022-06-16', '01:24 am', '10000', '10000', 10000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nurses`
 --
 
@@ -329,7 +373,7 @@ CREATE TABLE `nurses` (
 --
 
 INSERT INTO `nurses` (`id`, `fname`, `lname`, `username`, `password`, `birth`, `phone`, `gender`) VALUES
-(1, 'Hussien', 'Zaarour', 'husszaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1999-04-12', '76767676', 'Male'),
+(1, 'Hussien', 'Zaarour', 'husszaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1999-04-12', '76 767 676', 'Male'),
 (2, 'Alaa', 'Zaarour', 'alaazaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1996-07-25', '71717171', 'Female');
 
 -- --------------------------------------------------------
@@ -358,8 +402,8 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`id`, `ssn`, `fname`, `lname`, `profile`, `email`, `phone`, `password`, `gender`, `birth`, `address`, `is_critical`) VALUES
-(1, '000047359813', 'Ammar ', 'Zaarour', 'IMG-62631a695998e9.42777059.jpg', 'ammar.rushdi.zaarour@gmail.com', '71696574', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '2000-04-12', 'El-Marj, Bekaa, Lebanon', 0),
-(2, '00004737832', 'Ali', 'Haidar', 'IMG-62867e09deb714.30441724.jpg', 'ali.haidar@gmail.com', '71 232323', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '1990-12-05', 'Bar-Elias, Bekaa, Lebanon', 1),
+(1, '000047359813', 'Ammar ', 'Zaarour', 'IMG-62a9cacc3fb5c1.14115066.jpg', 'ammar.rushdi.zaarour@gmail.com', '71696574', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '2000-04-12', 'El-Marj, Bekaa, Lebanon', 1),
+(2, '00004737832', 'Ali', 'haidar', 'IMG-62867e09deb714.30441724.jpg', 'ali.haidar@gmail.com', '71 232323', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '1990-12-05', 'Bar-Elias, Bekaa, Lebanon', 1),
 (3, '000047359890', 'Rola', 'Shehab', 'user.jpg', 'rola.she@gmail.com', '71 676767', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Female', '1989-12-07', 'Hamra, Beirut, Lebanon', 0),
 (4, '000047359833', 'Rana', 'Haj', 'IMG-62867f47d94009.52264382.jpg', 'rana.haj@gmail.com', '03 555555', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Female', '1995-12-05', 'Nabatieh, South Lebanon, Lebanon', 0),
 (5, '000047359844', 'Khaled', 'Hali', 'IMG-6286804834d4b7.67672678.jpg', 'khaled.hali@gmail.com', '81 765645', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Male', '1980-09-18', 'Khiam, South Lebanon, Lebanon', 1);
@@ -414,7 +458,7 @@ CREATE TABLE `radiotech` (
 --
 
 INSERT INTO `radiotech` (`id`, `fname`, `lname`, `username`, `password`, `birth`, `phone`, `gender`) VALUES
-(1, 'Mohammad', 'Zaarour', 'moezaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1997-03-06', '71400000', 'Male'),
+(1, 'Mohammad', 'Zaarour', 'moezaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1997-03-06', '71 400 000', 'Male'),
 (2, 'Ahmad', 'Zaarour', 'ahmadzaa', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '1994-03-10', '71600000', 'Male');
 
 -- --------------------------------------------------------
@@ -536,6 +580,12 @@ ALTER TABLE `labtests`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `monitoring`
+--
+ALTER TABLE `monitoring`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `nurses`
 --
 ALTER TABLE `nurses`
@@ -573,13 +623,13 @@ ALTER TABLE `timing`
 -- AUTO_INCREMENT for table `add_lab_res`
 --
 ALTER TABLE `add_lab_res`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `add_radio_res`
 --
 ALTER TABLE `add_radio_res`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -591,13 +641,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -609,31 +659,31 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `dolab`
 --
 ALTER TABLE `dolab`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `doradio`
 --
 ALTER TABLE `doradio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `has_time`
 --
 ALTER TABLE `has_time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `labtech`
 --
 ALTER TABLE `labtech`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `labtests`
@@ -642,16 +692,22 @@ ALTER TABLE `labtests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `monitoring`
+--
+ALTER TABLE `monitoring`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `nurses`
 --
 ALTER TABLE `nurses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `radios`
@@ -663,7 +719,7 @@ ALTER TABLE `radios`
 -- AUTO_INCREMENT for table `radiotech`
 --
 ALTER TABLE `radiotech`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `timing`
