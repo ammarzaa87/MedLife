@@ -1,3 +1,6 @@
+To login as admin use: username: med_admin , password: 1234
+
+
 A web application, unlike computer-based software packages that are kept locally on the machine, is software that runs on a web server. The user uses a web browser with an internet - connected device to access web apps.
 Starting with the MedLife Web application's home page. It comprises of a log in screen where you select the kind of user you are and then log in with your login details.
 The following are the many categories of users you may choose from:
